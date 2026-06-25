@@ -201,6 +201,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const btnHeroConsult = document.getElementById("btn-hero-consult");
     const heroQuizTrigger = document.getElementById("hero-quiz-trigger");
     const closeAiBtn = document.getElementById("close-ai-btn");
+    const aiFab = document.getElementById("ai-fab");
     const closeCartBtns = document.querySelectorAll(".close-cart-drawer");
     
     // OpenAI Settings Panel Selectors
@@ -906,6 +907,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     navConsultBtn.addEventListener("click", (e) => { e.preventDefault(); toggleAiClinic(true); });
+    if (aiFab) { aiFab.addEventListener("click", () => toggleAiClinic(true)); }
     btnHeroConsult.addEventListener("click", () => startGuidedQuiz());
     heroQuizTrigger.addEventListener("click", () => startGuidedQuiz());
     closeAiBtn.addEventListener("click", () => toggleAiClinic(false));
