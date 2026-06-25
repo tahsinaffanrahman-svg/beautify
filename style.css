@@ -2259,73 +2259,101 @@ body.dark-mode .api-status-badge.connected {
    ========================================================================== */
 .ai-fab {
     position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 60px;
-    height: 60px;
+    bottom: 32px;
+    right: 32px;
+    width: 64px;
+    height: 64px;
     border-radius: 50%;
-    background: linear-gradient(135deg, hsl(var(--color-rose-gold)), hsl(var(--color-rose-gold-light)));
+    background: linear-gradient(145deg, #d4956a, #b5714a);
     color: #ffffff;
     border: none;
     cursor: pointer;
-    box-shadow: var(--shadow-premium), var(--shadow-glow);
+    box-shadow: 0 6px 24px rgba(180, 100, 60, 0.45), 0 2px 8px rgba(0,0,0,0.2);
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 900;
-    transition: var(--transition-bounce);
+    z-index: 9999;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease, opacity 0.3s ease;
+    overflow: visible;
+}
+
+.ai-fab svg {
+    position: relative;
+    z-index: 2;
+    flex-shrink: 0;
+}
+
+/* Tooltip label */
+.ai-fab::before {
+    content: 'Ask Dr. Ava';
+    position: absolute;
+    right: calc(100% + 12px);
+    top: 50%;
+    transform: translateY(-50%) translateX(8px);
+    background: rgba(30, 25, 22, 0.9);
+    color: #f5ede7;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    padding: 6px 12px;
+    border-radius: 20px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.ai-fab:hover::before {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
 }
 
 .ai-fab:hover {
-    transform: scale(1.1) translateY(-3px);
-    box-shadow: var(--shadow-premium), 0 12px 36px rgba(197, 143, 114, 0.3);
+    transform: scale(1.1) translateY(-4px);
+    box-shadow: 0 10px 32px rgba(180, 100, 60, 0.55), 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .ai-fab:active {
-    transform: scale(0.95);
+    transform: scale(0.94);
 }
 
-/* FAB Pulse effect */
+/* FAB Pulse ring */
 .ai-fab .fab-pulse {
     position: absolute;
     width: 100%;
     height: 100%;
     border-radius: 50%;
-    background-color: hsl(var(--color-rose-gold));
-    opacity: 0.4;
-    z-index: -1;
-    animation: fab-pulsate 2.5s infinite;
+    background-color: #d4956a;
+    opacity: 0;
+    z-index: 0;
+    animation: fab-pulsate 2.2s ease-out infinite;
+    pointer-events: none;
 }
 
 @keyframes fab-pulsate {
-    0% {
-        transform: scale(1);
-        opacity: 0.4;
-    }
-    50% {
-        transform: scale(1.4);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(1);
-        opacity: 0;
-    }
+    0%   { transform: scale(1);   opacity: 0.55; }
+    70%  { transform: scale(1.55); opacity: 0; }
+    100% { transform: scale(1.55); opacity: 0; }
 }
 
 /* Hide FAB when AI Drawer is open */
-#ai-clinic-drawer[aria-hidden="false"] ~ #ai-fab {
-    opacity: 0;
-    pointer-events: none;
-    transform: scale(0.8) translateY(20px);
+.ai-fab.fab-hidden {
+    opacity: 0 !important;
+    pointer-events: none !important;
+    transform: scale(0.7) translateY(16px) !important;
 }
 
-/* Hide FAB on small mobile devices to avoid overlapping checkouts */
+/* Responsive: smaller on mobile */
 @media (max-width: 480px) {
     .ai-fab {
         bottom: 20px;
         right: 20px;
-        width: 50px;
-        height: 50px;
+        width: 54px;
+        height: 54px;
+    }
+    .ai-fab::before {
+        display: none;
     }
 }
 

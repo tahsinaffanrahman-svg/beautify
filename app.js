@@ -897,12 +897,14 @@ document.addEventListener("DOMContentLoaded", () => {
             closeAllPanels();
             aiClinicDrawer.setAttribute("aria-hidden", "false");
             aiActiveIndicator.classList.add("active");
+            if (aiFab) aiFab.classList.add("fab-hidden");
             if (chatMessagesContainer.children.length === 0) {
                 sendInitialGreetings();
             }
         } else {
             aiClinicDrawer.setAttribute("aria-hidden", "true");
             aiActiveIndicator.classList.remove("active");
+            if (aiFab) aiFab.classList.remove("fab-hidden");
         }
     }
 
