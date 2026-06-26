@@ -187,6 +187,22 @@ let quizState = {
 
 // 3. Document Element Selectors
 document.addEventListener("DOMContentLoaded", () => {
+    // Initialize i18n (must be first to translate static DOM)
+    if (typeof i18n !== "undefined") {
+        i18n.init();
+        // Update font on Bangla
+        function updateLangFont(lang) {
+            document.documentElement.lang = lang;
+            if (lang === "bn") {
+                document.body.style.fontFamily = "'Noto Sans Bengali', 'Plus Jakarta Sans', sans-serif";
+            } else {
+                document.body.style.fontFamily = "";
+            }
+        }
+        updateLangFont(i18n.getLang());
+        i18n.onLangChange(updateLangFont);
+    }
+
     // UI Panels & Drawers
     const aiClinicDrawer = document.getElementById("ai-clinic-drawer");
     const cartDrawer = document.getElementById("cart-drawer");
@@ -300,8 +316,18 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggleBtn.addEventListener("click", () => {
         const isDark = document.body.classList.toggle("dark-mode");
         localStorage.setItem("beautify_theme", isDark ? "dark" : "light");
-        showToast(`Switched to ${isDark ? 'Dark Mode' : 'Light Pearl Mode'}.`);
+        showToast(i18n.t(isDark ? "toast.theme_dark" : "toast.theme_light"));
     });
+
+    // Language selector
+    const langSelector = document.getElementById("lang-selector");
+    if (langSelector && typeof i18n !== "undefined") {
+        langSelector.value = i18n.getLang();
+        langSelector.addEventListener("change", function () {
+            i18n.setLang(this.value);
+            showToast(i18n.t("toast.lang_changed", { lang: i18n.langNames[this.value] || this.value }));
+        });
+    }
 
     initTheme();
 
@@ -326,19 +352,19 @@ document.addEventListener("DOMContentLoaded", () => {
     function toggleAuthMode(register = true) {
         isRegisterMode = register;
         if (register) {
-            authTitle.innerText = "Create Skincare Profile";
-            authSubtitle.innerText = "Unlock custom molecular compatibility scores and save your diagnostic logs.";
+            authTitle.innerText = i18n.t("auth.title.register");
+            authSubtitle.innerText = i18n.t("auth.subtitle.register");
             document.getElementById("group-auth-name").style.display = "flex";
             document.getElementById("group-auth-skin").style.display = "flex";
-            btnAuthSubmit.innerText = "Create Profile";
-            authToggleLink.innerText = "Already have an account? Log In";
+            btnAuthSubmit.innerText = i18n.t("auth.btn.register");
+            authToggleLink.innerText = i18n.t("auth.toggle.login");
         } else {
-            authTitle.innerText = "Sign In to Beautify";
-            authSubtitle.innerText = "Access your saved skin configurations and recommendations.";
+            authTitle.innerText = i18n.t("auth.title.login");
+            authSubtitle.innerText = i18n.t("auth.subtitle.login");
             document.getElementById("group-auth-name").style.display = "none";
             document.getElementById("group-auth-skin").style.display = "none";
-            btnAuthSubmit.innerText = "Sign In";
-            authToggleLink.innerText = "Don't have an account? Sign Up";
+            btnAuthSubmit.innerText = i18n.t("auth.btn.login");
+            authToggleLink.innerText = i18n.t("auth.toggle.register");
         }
     }
 
@@ -365,23 +391,23 @@ document.addEventListener("DOMContentLoaded", () => {
             };
             
             localStorage.setItem("beautify_user", JSON.stringify(currentUser));
-            showToast(`Profile created. Welcome ${name}!`);
+            showToast(i18n.t("toast.profile_created", { name }));
         } else {
             const storedUser = localStorage.getItem("beautify_user");
             if (storedUser) {
                 const parsed = JSON.parse(storedUser);
                 if (parsed.email === email) {
                     currentUser = parsed;
-                    showToast(`Welcome back, ${currentUser.name}!`);
+                    showToast(i18n.t("toast.welcome_back", { name: currentUser.name }));
                 } else {
                     currentUser = { name: email.split("@")[0], email, skinType: "unspecified", points: 100, prescriptions: [] };
                     localStorage.setItem("beautify_user", JSON.stringify(currentUser));
-                    showToast(`Logged in successfully.`);
+                    showToast(i18n.t("toast.logged_in"));
                 }
             } else {
                 currentUser = { name: email.split("@")[0], email, skinType: "unspecified", points: 100, prescriptions: [] };
                 localStorage.setItem("beautify_user", JSON.stringify(currentUser));
-                showToast(`Profile created.`);
+                showToast(i18n.t("toast.logged_in"));
             }
         }
         
@@ -406,7 +432,7 @@ document.addEventListener("DOMContentLoaded", () => {
         filterSkinOptions.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
         filterSkinOptions.querySelector("[data-skin='all']").classList.add("active");
         
-        showToast("Logged out successfully.");
+        showToast(i18n.t("toast.logged_out"));
         updateProfileUI();
         toggleProfileModal(false);
         renderProducts();
@@ -421,7 +447,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const initials = names.map(n => n[0]).join("").substring(0, 2).toUpperCase();
             profileInitials.innerText = initials || "B";
             profileSkinDisplay.innerText = getFormattedSkinType(currentUser.skinType);
-            profilePointsDisplay.innerText = `${currentUser.points} Glow Points`;
+            profilePointsDisplay.innerText = i18n.t("auth.logged_in.points", { points: currentUser.points });
             
             profilePrescriptions.innerHTML = "";
             if (currentUser.prescriptions && currentUser.prescriptions.length > 0) {
@@ -437,7 +463,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     profilePrescriptions.appendChild(el);
                 });
             } else {
-                profilePrescriptions.innerHTML = `<p class="empty-note">No consultation reports saved yet. Complete a quiz to receive recommendations.</p>`;
+                profilePrescriptions.innerHTML = `<p class="empty-note">${i18n.t("auth.logged_in.empty")}</p>`;
             }
         } else {
             profileLoggedOutView.classList.add("active");
@@ -460,6 +486,11 @@ document.addEventListener("DOMContentLoaded", () => {
     profileModalOverlay.addEventListener("click", () => toggleProfileModal(false));
 
     function getFormattedSkinType(type) {
+        if (typeof i18n !== "undefined") {
+            var key = "ai.skin." + type;
+            var translated = i18n.t(key);
+            if (translated !== key) return translated;
+        }
         switch(type) {
             case "dry": return "Dry Skin";
             case "oily": return "Oily Skin";
@@ -475,32 +506,32 @@ document.addEventListener("DOMContentLoaded", () => {
        ========================================================================== */
     function calculateMatchScore(product, skinType) {
         if (!skinType || skinType === "unspecified" || skinType === "all") {
-            return { score: null, label: "Click to Match", cssClass: "neutral-match" };
+            return { score: null, labelKey: "catalog.match.click", label: "Click to Match", cssClass: "neutral-match" };
         }
         
         const isDirectlySuitable = product.skinTypes.includes(skinType);
         
         // Mismatch logic overrides
         if (product.id === 4 && (skinType === "sensitive" || skinType === "dry")) {
-            return { score: 55, label: "Caution Match", cssClass: "caution-match" };
+            return { score: 55, labelKey: "catalog.match.caution", label: "Caution Match", cssClass: "caution-match" };
         }
-        if (product.id === 8 && skinType === "sensitive") { // high AHA peel on sensitive
-            return { score: 40, label: "Not Suitable", cssClass: "caution-match" };
+        if (product.id === 8 && skinType === "sensitive") {
+            return { score: 40, labelKey: "catalog.match.unsuitable", label: "Not Suitable", cssClass: "caution-match" };
         }
         if (product.id === 2 && skinType === "dry") {
-            return { score: 72, label: "Medium Match", cssClass: "medium-match" };
+            return { score: 72, labelKey: "catalog.match.medium", label: "Medium Match", cssClass: "medium-match" };
         }
         if (product.id === 3 && skinType === "oily") {
-            return { score: 68, label: "Medium Match", cssClass: "medium-match" };
+            return { score: 68, labelKey: "catalog.match.medium", label: "Medium Match", cssClass: "medium-match" };
         }
 
         if (isDirectlySuitable) {
             if (product.id === 1 || product.id === 3 || product.id === 7 || product.id === 10) {
-                return { score: 98, label: "High Match", cssClass: "high-match" };
+                return { score: 98, labelKey: "catalog.match.high", label: "High Match", cssClass: "high-match" };
             }
-            return { score: 92, label: "High Match", cssClass: "high-match" };
+            return { score: 92, labelKey: "catalog.match.high", label: "High Match", cssClass: "high-match" };
         }
-        return { score: 80, label: "Medium Match", cssClass: "medium-match" };
+        return { score: 80, labelKey: "catalog.match.medium", label: "Medium Match", cssClass: "medium-match" };
     }
 
     function renderProducts() {
@@ -516,7 +547,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (filteredProducts.length === 0) {
             productGridContainer.innerHTML = `
                 <div class="empty-catalog-message" style="grid-column: 1/-1; text-align: center; padding: 48px 0; color: hsl(var(--color-slate-gray));">
-                    <p>No formulation matches this filter combination. Try resetting your skin filters.</p>
+                    <p>${i18n.t("catalog.empty")}</p>
                 </div>
             `;
             return;
@@ -528,10 +559,12 @@ document.addEventListener("DOMContentLoaded", () => {
             card.style.animation = "slide-up 0.5s ease forwards";
             
             const matchInfo = calculateMatchScore(product, activeSkinType);
-            const badgeContent = matchInfo.score ? `${matchInfo.score}% Match` : matchInfo.label;
+            const badgeContent = matchInfo.score 
+                ? matchInfo.score + "% " + i18n.t("catalog.match.label")
+                : i18n.t(matchInfo.labelKey || "catalog.match.click");
             
             card.innerHTML = `
-                <span class="product-badge">${product.badge || "Skincare"}</span>
+                <span class="product-badge">${product.badge || i18n.t("catalog.product.badge_default")}</span>
                 <span class="product-match-badge ${matchInfo.cssClass}">${badgeContent}</span>
                 <div class="product-image-container">
                     <img src="${product.image}" alt="${product.name}" class="product-img">
@@ -539,24 +572,24 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="product-content">
                     <div class="product-rating-wrap">
                         ${"★".repeat(Math.floor(product.rating))}${"☆".repeat(5 - Math.floor(product.rating))}
-                        <span class="product-rating-count">(${product.reviews.toLocaleString()} reviews)</span>
+                        <span class="product-rating-count">(${product.reviews.toLocaleString()} ${i18n.t("catalog.product.reviews")})</span>
                     </div>
-                    <span class="product-suitability">${product.skinTypes.join(" • ")} skin</span>
+                    <span class="product-suitability">${product.skinTypes.join(" • ")} ${i18n.t("catalog.product.skin")}</span>
                     <h3 class="product-title" style="font-size: 1.45rem;">${product.name}</h3>
                     <span class="product-price">$${product.price.toFixed(2)}</span>
                     <p class="product-desc" style="margin-bottom: 12px;">${product.description}</p>
                     <div class="product-ingredients" style="margin-bottom: 16px;">
-                        <span class="ingredient-label">Molecular Actives</span>
+                        <span class="ingredient-label">${i18n.t("catalog.product.actives")}</span>
                         <span class="ingredient-text">${product.activeIngredients}</span>
                     </div>
                     <div class="product-actions">
                         <div class="product-actions-row">
-                            <button class="btn btn-card-buy buy-now-btn" data-id="${product.id}">Buy Now</button>
-                            <button class="btn btn-card-cart add-to-cart-btn" data-id="${product.id}">Add to Cart</button>
+                            <button class="btn btn-card-buy buy-now-btn" data-id="${product.id}">${i18n.t("catalog.product.buy")}</button>
+                            <button class="btn btn-card-cart add-to-cart-btn" data-id="${product.id}">${i18n.t("catalog.product.cart")}</button>
                         </div>
                         <button class="btn btn-card-consult consult-product-btn" data-id="${product.id}">
                             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-                            Consult Dr. Ava
+                            ${i18n.t("catalog.product.consult")}
                         </button>
                     </div>
                 </div>
@@ -593,7 +626,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         updateCartUI();
-        showToast(`Added ${product.name} to cart.`);
+        showToast(i18n.t("toast.added_to_cart", { product: product.name }));
     }
 
     // Direct Buy Now Bypass
@@ -620,13 +653,13 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("ship-name").value = currentUser.name;
             document.getElementById("ship-email").value = currentUser.email;
         }
-        showToast(`Buy Now: Checkout ${product.name}.`);
+        showToast(i18n.t("toast.buy_now", { product: product.name }));
     }
 
     function removeFromCart(id) {
         cart = cart.filter(item => item.product.id !== id);
         updateCartUI();
-        showToast("Removed from cart.");
+        showToast(i18n.t("toast.removed_from_cart"));
     }
 
     function updateQuantity(id, newQty) {
@@ -710,7 +743,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cartBadgeCount.innerText = totalItems;
         cartSubtotalElements.forEach(el => el.innerText = `$${subtotalVal.toFixed(2)}`);
         cartTotalElements.forEach(el => el.innerText = `$${subtotalVal.toFixed(2)}`);
-        btnSubmitOrder.innerText = `Place Order ($${subtotalVal.toFixed(2)})`;
+        btnSubmitOrder.innerText = i18n.t("cart.btn.place_order", { total: "$" + subtotalVal.toFixed(2) });
     }
 
     btnProceedShipping.addEventListener("click", () => {
@@ -781,13 +814,13 @@ document.addEventListener("DOMContentLoaded", () => {
         if (paymentForm.checkValidity()) {
             const cardNo = cardNoInput.value.replace(/\s+/g, '');
             if (cardNo.length < 16) {
-                showToast("Enter a valid 16-digit card number.");
+                showToast(i18n.t("toast.card_invalid"));
                 cardNoInput.focus();
                 return;
             }
             
             btnSubmitOrder.disabled = true;
-            btnSubmitOrder.innerText = "Securing Bank Pipeline...";
+            btnSubmitOrder.innerText = i18n.t("cart.btn.place_order_processing");
             
             setTimeout(() => {
                 checkoutStep3.classList.remove("active");
@@ -849,12 +882,12 @@ document.addEventListener("DOMContentLoaded", () => {
         const key = localStorage.getItem("openai_api_key");
         if (key) {
             openaiApiKeyInput.value = key;
-            apiStatusBadge.innerText = "Live Connected";
+            apiStatusBadge.innerHTML = i18n.t("ai.settings.mode_connected");
             apiStatusBadge.className = "api-status-badge connected";
             btnClearOpenaiKey.style.display = "block";
         } else {
             openaiApiKeyInput.value = "";
-            apiStatusBadge.innerText = "Simulation Mode";
+            apiStatusBadge.innerHTML = i18n.t("ai.settings.mode_simulation");
             apiStatusBadge.className = "api-status-badge simulation";
             btnClearOpenaiKey.style.display = "none";
         }
@@ -869,20 +902,20 @@ document.addEventListener("DOMContentLoaded", () => {
         const key = openaiApiKeyInput.value.trim();
         if (key.startsWith("sk-")) {
             localStorage.setItem("openai_api_key", key);
-            showToast("OpenAI API Key configured successfully!");
+            showToast(i18n.t("ai.settings.key_saved"));
             openaiConfigPanel.style.display = "none";
             initOpenaiConfig();
             
             // Send connection notice
-            appendMessage("doctor", "✨ <strong>OpenAI Engine Connected</strong><br><br>My neural networks are online. Ask me complex questions, ingredient pairings, or custom routines!");
+            appendMessage("doctor", i18n.t("openai.connected"));
         } else {
-            showToast("Invalid key format. Should start with 'sk-'.");
+            showToast(i18n.t("ai.settings.invalid"));
         }
     });
 
     btnClearOpenaiKey.addEventListener("click", () => {
         localStorage.removeItem("openai_api_key");
-        showToast("OpenAI API Key cleared.");
+        showToast(i18n.t("ai.settings.key_cleared"));
         openaiConfigPanel.style.display = "none";
         initOpenaiConfig();
     });
@@ -930,14 +963,19 @@ document.addEventListener("DOMContentLoaded", () => {
         clearMessages();
         
         const activeSkinType = currentUser ? currentUser.skinType : clinicUserSkin.value;
-        let matchHeaderText = "";
         
+        let greetingText;
         if (activeSkinType !== "unspecified") {
-            const matchInfo = calculateMatchScore(product, activeSkinType);
-            matchHeaderText = `<br><br>📊 <strong>Molecular Suitability: ${matchInfo.score}% (${matchInfo.label})</strong>.`;
+            greetingText = i18n.t("greeting.product_context", {
+                product: product.name,
+                skinType: getFormattedSkinType(activeSkinType)
+            });
+        } else {
+            greetingText = i18n.t("greeting.product_context", {
+                product: product.name,
+                skinType: "your"
+            });
         }
-
-        const greetingText = `I see you are inspecting the <strong>${product.name}</strong>.${matchHeaderText}<br><br>Let's check if this is suitable for your cells. Feel free to ask about chemical compatibility or routine orders!`;
         appendMessage("doctor", greetingText);
         populateSuggestions(product);
     }
@@ -955,12 +993,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 currentUser.skinType = skinType;
                 localStorage.setItem("beautify_user", JSON.stringify(currentUser));
             }
-            showToast(`Profile updated: ${getFormattedSkinType(skinType)}`);
+            showToast(i18n.t("toast.profile_updated", { skinType: getFormattedSkinType(skinType) }));
             renderProducts();
             if (activeProductContext) {
                 setConsultationContext(activeProductContext.id);
             } else {
-                appendMessage("user", `My skin is ${getFormattedSkinType(skinType)}.`);
+                appendMessage("user", i18n.t("auth.skin_change", { skinType: getFormattedSkinType(skinType) }));
                 simulateDrAvaTyping(() => {
                     const advice = getGeneralSkinAdvice(skinType);
                     appendMessage("doctor", advice);
@@ -982,11 +1020,20 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function sendInitialGreetings() {
         clearMessages();
-        let greeting = "Hello! I am Dr. Ava. Let's create your optimized skincare regimen. ";
-        if (currentUser && currentUser.skinType !== "unspecified") {
-            greeting += `I see your profile matches a <strong>${getFormattedSkinType(currentUser.skinType)}</strong> profile. How can I assist you with ingredients today?`;
+        let greeting;
+        if (currentUser) {
+            if (currentUser.skinType && currentUser.skinType !== "unspecified") {
+                // Returning user — acknowledge and offer new value
+                greeting = i18n.t("greeting.returning", {
+                    skinType: getFormattedSkinType(currentUser.skinType)
+                });
+            } else {
+                // Registered but no skin type — ask gently
+                greeting = i18n.t("greeting.new.no_skin");
+            }
         } else {
-            greeting += "Skincare is most effective when personalized. I recommend starting our 30-Second Skin Quiz below so I can calculate molecular match scores for you.";
+            // New visitor, no account — warm welcome
+            greeting = i18n.t("greeting.new.no_skin");
         }
         appendMessage("doctor", greeting);
         populateSuggestions(null);
@@ -1056,26 +1103,27 @@ document.addEventListener("DOMContentLoaded", () => {
             quizPill.style.borderColor = "hsl(var(--color-rose-gold))";
             quizPill.style.color = "hsl(var(--color-rose-gold))";
             quizPill.style.fontWeight = "bold";
-            quizPill.innerText = "✨ Take Skin Quiz";
+            quizPill.innerText = i18n.t("quiz.suggestion.quiz");
             quizPill.addEventListener("click", () => startGuidedQuiz());
             chatQuickSuggestions.appendChild(quizPill);
         }
 
         let questions = [];
         if (product) {
+            const skinLabel = activeSkinType === "unspecified" || activeSkinType === "all" ? i18n.t("suggestion.my_skin") : getFormattedSkinType(activeSkinType);
             questions = [
-                `Is this safe for ${activeSkinType === 'unspecified' ? 'my' : activeSkinType} skin?`,
-                `How do I apply this?`,
-                `What are the active molecules?`,
-                `Can I layer this with Retinol?`
+                i18n.t("suggestion.safe", { skinType: skinLabel }),
+                i18n.t("suggestion.apply"),
+                i18n.t("suggestion.ingredients"),
+                product.id === 4 || product.id === 8 ? i18n.t("suggestion.peeling") : i18n.t("suggestion.layer")
             ];
-            if (product.id === 4 || product.id === 8) questions[3] = "What is acid peeling warnings?";
         } else {
+            const skinTypeKey = activeSkinType !== "unspecified" && activeSkinType !== "all" ? activeSkinType : "dry";
             questions = [
-                "Suggest a routine for dry skin.",
-                "How do I clear persistent blemishes?",
-                "Which product repairs red irritated skin?",
-                "What is Cell-Ox Shield technology?"
+                i18n.t("suggestion.routine_" + skinTypeKey),
+                i18n.t("suggestion.blemishes"),
+                i18n.t("suggestion.red_irritated"),
+                i18n.t("suggestion.tech")
             ];
         }
 
@@ -1095,12 +1143,12 @@ document.addEventListener("DOMContentLoaded", () => {
         quizState.inProgress = true;
         quizState.currentStep = 1;
         
-        appendMessage("doctor", "🌟 **Guided Skin Quiz (Question 1 of 3)**<br><br>How does your skin feel in the afternoon/mid-day?");
+        appendMessage("doctor", i18n.t("quiz.q1"));
         injectQuizOptionButtons([
-            { text: "Tight, dry, or peeling in areas", val: "dry" },
-            { text: "Shiny and oily all over", val: "oily" },
-            { text: "Shiny in the T-zone, dry on the cheeks", val: "combination" },
-            { text: "Red, itching, or stinging easily", val: "sensitive" }
+            { text: i18n.t("quiz.q1.opt1"), val: "dry" },
+            { text: i18n.t("quiz.q1.opt2"), val: "oily" },
+            { text: i18n.t("quiz.q1.opt3"), val: "combination" },
+            { text: i18n.t("quiz.q1.opt4"), val: "sensitive" }
         ]);
     }
 
@@ -1112,12 +1160,12 @@ document.addEventListener("DOMContentLoaded", () => {
             quizState.currentStep = 2;
             
             simulateDrAvaTyping(() => {
-                appendMessage("doctor", "📝 **Question 2 of 3**<br><br>How frequently do you experience breakouts, blackheads, or clogged pores?");
+                appendMessage("doctor", i18n.t("quiz.q2"));
                 injectQuizOptionButtons([
-                    { text: "Rarely or never", val: "dry_sens" },
-                    { text: "Frequently, all over my face", val: "acne" },
-                    { text: "Occasionally, mainly on chin or forehead", val: "combination" },
-                    { text: "Mainly red bumps that itch, not blackheads", val: "sensitive" }
+                    { text: i18n.t("quiz.q2.opt1"), val: "dry_sens" },
+                    { text: i18n.t("quiz.q2.opt2"), val: "acne" },
+                    { text: i18n.t("quiz.q2.opt3"), val: "combination" },
+                    { text: i18n.t("quiz.q2.opt4"), val: "sensitive" }
                 ]);
             });
         } 
@@ -1126,12 +1174,12 @@ document.addEventListener("DOMContentLoaded", () => {
             quizState.currentStep = 3;
             
             simulateDrAvaTyping(() => {
-                appendMessage("doctor", "🎯 **Question 3 of 3**<br><br>What is your primary skin objective?");
+                appendMessage("doctor", i18n.t("quiz.q3"));
                 injectQuizOptionButtons([
-                    { text: "Deep hydration & cell plumping", val: "hydration" },
-                    { text: "Controlling oil & clearing blemishes", val: "blemish" },
-                    { text: "Fading fine lines & anti-aging", val: "anti_aging" },
-                    { text: "Soothing redness & restoring barrier comfort", val: "barrier" }
+                    { text: i18n.t("quiz.q3.opt1"), val: "hydration" },
+                    { text: i18n.t("quiz.q3.opt2"), val: "blemish" },
+                    { text: i18n.t("quiz.q3.opt3"), val: "anti_aging" },
+                    { text: i18n.t("quiz.q3.opt4"), val: "barrier" }
                 ]);
             });
         } 
@@ -1157,15 +1205,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 
                 clinicUserSkin.value = resultSkin;
-                showToast(`Quiz complete: ${getFormattedSkinType(resultSkin)} detected!`);
+                showToast(i18n.t("toast.quiz_complete", { skinType: getFormattedSkinType(resultSkin) }));
                 renderProducts();
                 
-                const matchesText = `🔬 <strong>Dermatological Skin Analysis Report</strong><br><br>
-                Based on your answers, your profile is classified as: <strong>${getFormattedSkinType(resultSkin)}</strong>.<br><br>
-                Your product catalog has been updated with live molecular compatibility score badges!`;
-                
                 const recProduct = getRecommendedProductBySkin(resultSkin);
-                const recNote = `I recommend starting your routine with our <strong>${recProduct.name}</strong> ($${recProduct.price.toFixed(2)}) which matches your objective.`;
+                const skinTypeLabel = getFormattedSkinType(resultSkin);
+                
+                const matchesText = i18n.t("quiz.report.body", { skinType: skinTypeLabel });
+                const recNote = i18n.t("quiz.report.rec", { product: recProduct.name, price: "$" + recProduct.price.toFixed(2) });
                 
                 appendMessage("doctor", matchesText, recNote);
                 populateSuggestions(null);
@@ -1233,7 +1280,7 @@ document.addEventListener("DOMContentLoaded", () => {
         chatInput.value = "";
         
         if (quizState.inProgress) {
-            appendMessage("doctor", "Please select one of the diagnostic options above to complete your evaluation.");
+            appendMessage("doctor", i18n.t("quiz.block"));
             return;
         }
 
@@ -1251,6 +1298,7 @@ document.addEventListener("DOMContentLoaded", () => {
             `- ID: ${p.id}, Product: ${p.name}, Price: $${p.price.toFixed(2)}, Actives: ${p.activeIngredients}, Concern: ${p.concern}, Suitabilities: ${p.skinTypes.join(",")}, Note: ${p.clinicalNote}`
         ).join("\n");
 
+        const lang = typeof i18n !== "undefined" ? i18n.getLang() : "en";
         const systemPrompt = `You are Dr. Ava, a highly professional, warm, and expert clinical dermatologist virtual assistant at Beautify, an online skincare store.
         
         Your objective is to provide scientific analysis regarding skincare concerns, matching active molecules with user skin profiles.
@@ -1261,6 +1309,8 @@ document.addEventListener("DOMContentLoaded", () => {
         USER SKIN PROFILE:
         - Diagnosed skin type: ${getFormattedSkinType(activeSkinType)}
         - Currently focused product context: ${activeProductContext ? activeProductContext.name : "None"}
+        
+        LANGUAGE: You MUST respond in the same language as the user's message. The user's current UI language is: "${lang}". If they write in Spanish, answer in Spanish. If they write in Hindi, answer in Hindi. If they write in Bangla, answer in Bangla. If they write in English, answer in English.
         
         DIAGNOSTIC RULES:
         1. Always maintain a warm, expert clinical tone.
@@ -1313,12 +1363,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         } catch (error) {
             hideTypingIndicator();
-            showToast("OpenAI API Connection failed. Reverting to Simulation Mode.");
+            showToast(i18n.t("openai.disconnected"));
             console.error("OpenAI Error:", error);
             
             // API key failure fallback
-            const errFallbackText = `⚠️ <strong>OpenAI connection refused:</strong> ${error.message}<br><br>I have reverted back to my local clinical simulation mode. Ask me anything!`;
-            appendMessage("doctor", errFallbackText);
+            appendMessage("doctor", i18n.t("openai.error", { error: error.message }));
             populateSuggestions(activeProductContext);
         }
     }
@@ -1335,6 +1384,9 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     function getGeneralSkinAdvice(skinType) {
+        var key = "response.skin_advice." + skinType;
+        var translated = i18n.t(key);
+        if (translated !== key) return translated;
         switch(skinType) {
             case "dry":
                 return `For <strong>dry skin</strong>, the main objective is rebuilding cell hydration. I recommend applying the <strong>COSRX Snail 96 Mucin Essence</strong> followed by a thick lipid seal like <strong>CeraVe Moisturizing Cream</strong>. Avoid active alcohols.`;
@@ -1353,54 +1405,48 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function processQueryAI(query, product, skinType) {
         const q = query.toLowerCase();
+        const fmtSkin = getFormattedSkinType(skinType);
         
         if (product) {
             if (q.includes("safe") || q.includes("suitable") || q.includes("compatible")) {
-                const isCompatible = product.skinTypes.includes(skinType);
                 if (skinType === "unspecified") {
                     return {
-                        text: `Checking safety metrics for <strong>${product.name}</strong>... The safety profile is: ${product.safetyProfile}.<br><br>However, if you take our guided Skin Quiz above, I can calculate a compatibility rating for your unique skin barrier.`,
+                        text: i18n.t("response.safety.unspecified", { product: product.name, safety: product.safetyProfile }),
                         clinicalNote: product.clinicalNote
                     };
                 }
+                const isCompatible = product.skinTypes.includes(skinType);
                 return {
                     text: isCompatible 
-                        ? `Yes, the active ingredients in <strong>${product.name}</strong> are perfectly suited for your <strong>${getFormattedSkinType(skinType)}</strong>. It will reinforce your cells without triggering flare-ups.`
-                        : `For your <strong>${getFormattedSkinType(skinType)}</strong>, I recommend caution with <strong>${product.name}</strong>. Active elements might trigger dryness. Ensure you apply a thin layer and pair with a moisture-lock barrier cream.`,
+                        ? i18n.t("response.safety.compatible", { product: product.name, skinType: fmtSkin })
+                        : i18n.t("response.safety.caution", { product: product.name, skinType: fmtSkin }),
                     clinicalNote: product.clinicalNote
                 };
             }
             
             if (q.includes("apply") || q.includes("how to use") || q.includes("directions") || q.includes("use this")) {
                 return {
-                    text: `Here is your dermatological routine order for <strong>${product.name}</strong>:<br><br>
-                    1. Cleanse thoroughly with a neutral wash.<br>
-                    2. <strong>${product.useInstructions}</strong><br>
-                    3. Follow with daytime SPF sunscreen if applying in the morning.`,
+                    text: i18n.t("response.usage", { product: product.name, instructions: product.useInstructions }),
                     clinicalNote: "Skincare requires 28 days (one full cell-turnover cycle) to display macro results."
                 };
             }
             
-            if (q.includes("ingredients") || q.includes("actives") || q.includes("contain") || q.includes("what is")) {
+            if (q.includes("ingredients") || q.includes("actives") || q.includes("contain") || q.includes("what is") || q.includes("molecule")) {
                 return {
-                    text: `The active profile of <strong>${product.name}</strong> includes: <strong>${product.activeIngredients}</strong>.<br><br>
-                    These concentration levels are clinically tested to remain bio-available without overloading skin cell metabolism.`,
+                    text: i18n.t("response.ingredients", { product: product.name, ingredients: product.activeIngredients }),
                     clinicalNote: "Beautify products are strictly clean, cruelty-free, and paraben-free."
                 };
             }
 
             if (q.includes("retinol") || q.includes("combine") || q.includes("layer") || q.includes("together") || q.includes("mix")) {
-                if (product.id === 4 || product.id === 8) { // exfoliants
+                if (product.id === 4 || product.id === 8) {
                     return {
-                        text: `⚠️ <strong>Layering Warning: Exfoliant + Retinol</strong><br><br>
-                        You should NOT layer strong acid chemical exfoliants and Retinol in the same evening routine. This will over-exfoliate your cells, causing barrier irritation.<br><br>
-                        <strong>Safe Routine:</strong> Apply acids in the morning (with SPF) and Retinol at night, or alternate evenings.`,
+                        text: i18n.t("response.retinol.caution", { product: product.name }),
                         clinicalNote: "Always keep strong acids and retinol separated to prevent chemical skin irritation."
                     };
                 }
                 return {
-                    text: `You can layer <strong>${product.name}</strong> alongside Retinol. <br><br>
-                    If the product is a hydrating or barrier shield (like COSRX Snail Mucin or CeraVe Cream), it acts as an excellent buffer to soothe skin redness triggered by Retinol renewal cycles.`,
+                    text: i18n.t("response.retinol.safe", { product: product.name }),
                     clinicalNote: "Apply your hydrating layer first, let absorb, then apply Retinol."
                 };
             }
@@ -1408,42 +1454,42 @@ document.addEventListener("DOMContentLoaded", () => {
 
         if (q.includes("hydrate") || q.includes("dry") || q.includes("moisturize") || q.includes("hydration")) {
             return {
-                text: `For hydration, I recommend the <strong>COSRX Snail Mucin Essence</strong> ($25.00), <strong>Kiehl's Ultra Facial Cream</strong> ($38.00), or <strong>CeraVe Moisturizing Cream</strong> ($16.00). Hyaluronic acid and snail mucin replenish moisture, while ceramides bind lipid cells together.`,
+                text: i18n.t("response.hydration"),
                 clinicalNote: "Always apply hydrating serums to slightly damp skin to maximize absorption."
             };
         }
 
         if (q.includes("acne") || q.includes("blemish") || q.includes("pimple") || q.includes("oily")) {
             return {
-                text: `To combat acne, use <strong>Paula's Choice 2% BHA Liquid</strong> ($35.00) or <strong>The Ordinary AHA/BHA Peel</strong> ($10.00) to clear pore debris. Balance sebum during the day using <strong>The Ordinary Niacinamide 10% + Zinc 1%</strong> ($9.00).`,
+                text: i18n.t("response.acne"),
                 clinicalNote: "Zinc helps reduce blemish swelling, while BHA clears blockages."
             };
         }
 
         if (q.includes("barrier") || q.includes("irritat") || q.includes("red") || q.includes("sensitive") || q.includes("eczema")) {
             return {
-                text: `For barrier recovery, prioritize <strong>CeraVe Moisturizing Cream</strong> ($16.00) or <strong>COSRX Snail Mucin</strong> ($25.00). They reintroduce essential hydration and lipids to cement flaking skin cells back together.`,
+                text: i18n.t("response.barrier"),
                 clinicalNote: "Isolate high-strength retinols or ascorbic acids until stinging stops."
             };
         }
 
         if (q.includes("aging") || q.includes("wrinkle") || q.includes("line") || q.includes("renew")) {
             return {
-                text: `For anti-aging concerns, peptides are excellent cell messengers. The <strong>Drunk Elephant Protini Polypeptide Cream</strong> ($68.00) delivers 9 signal peptides to firm sagging skin and replenish youthful bounce.`,
+                text: i18n.t("response.aging"),
                 clinicalNote: "Combine with sunscreen SPF 60 daily to prevent sun-induced collagen loss."
             };
         }
 
         if (q.includes("sunscreen") || q.includes("spf") || q.includes("sun") || q.includes("uv")) {
             return {
-                text: `Our clinical sunscreen is <strong>La Roche-Posay Anthelios SPF 60</strong> ($28.00). It features broad-spectrum filters and Cell-Ox Shield antioxidant protectors.`,
+                text: i18n.t("response.spf"),
                 clinicalNote: "Sunscreen is the final mandatory step of every morning skincare routine."
             };
         }
 
         return {
-            text: "I am ready to analyze your skincare routine. You can ask me about active ingredients (Ceramides, Peptides, Niacinamide, BHA), skin concerns (breakouts, dryness, red sensitivity), or product compatibility.",
-            clinicalNote: "Select 'Take Skincare Quiz' above to calculate compatibility ratings."
+            text: i18n.t("response.fallback"),
+            clinicalNote: "Select the quiz above to calculate compatibility ratings."
         };
     }
 
@@ -1494,6 +1540,26 @@ document.addEventListener("DOMContentLoaded", () => {
                 navMenu.style.padding = "24px";
                 navMenu.style.borderBottom = "1px solid hsl(var(--color-sand-medium))";
                 navMenu.style.gap = "16px";
+            }
+        });
+    }
+
+    // Language change re-render listener
+    if (typeof i18n !== "undefined") {
+        document.addEventListener("languagechange", function () {
+            // Re-render dynamic UI (static DOM is handled by i18n.setLang -> _translateDOM)
+            if (currentUser) updateProfileUI();
+            updateCartUI();
+            renderProducts();
+            initOpenaiConfig();
+            if (profileLoggedOutView.classList.contains("active")) {
+                toggleAuthMode(isRegisterMode);
+            }
+            if (activeProductContext) {
+                contextProdTitle.innerText = activeProductContext.name;
+            }
+            if (aiClinicDrawer.getAttribute("aria-hidden") === "false") {
+                populateSuggestions(activeProductContext);
             }
         });
     }

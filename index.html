@@ -22,37 +22,45 @@
             <a href="#" class="logo" id="logo-beautify">Beautify<span class="dot">.</span></a>
             
             <nav class="nav-menu" id="nav-menu">
-                <a href="#hero" class="nav-link active">Home</a>
-                <a href="#catalog" class="nav-link">Shop Collection</a>
-                <a href="#philosophy" class="nav-link">Our Science</a>
-                <a href="#" class="nav-link" id="nav-consult-btn">AI Dermatologist</a>
+                <a href="#hero" class="nav-link active" data-i18n="nav.home">Home</a>
+                <a href="#catalog" class="nav-link" data-i18n="nav.shop">Shop Collection</a>
+                <a href="#philosophy" class="nav-link" data-i18n="nav.science">Our Science</a>
+                <a href="#" class="nav-link" id="nav-consult-btn" data-i18n="nav.ai">AI Dermatologist</a>
             </nav>
             
             <div class="header-actions">
+                <!-- Language Selector -->
+                <select class="lang-selector" id="lang-selector" aria-label="Select Language">
+                    <option value="en">EN</option>
+                    <option value="es">ES</option>
+                    <option value="hi">HI</option>
+                    <option value="bn">BN</option>
+                </select>
+
                 <!-- Theme Toggle Button -->
-                <button class="icon-btn" id="theme-toggle-btn" aria-label="Toggle Theme">
+                <button class="icon-btn" id="theme-toggle-btn" data-i18n-aria-label="header.aria.theme">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="theme-icon-sun"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>
                 </button>
 
                 <!-- User Profile Toggle Button -->
-                <button class="icon-btn" id="profile-toggle-btn" aria-label="User Account">
+                <button class="icon-btn" id="profile-toggle-btn" data-i18n-aria-label="header.aria.profile">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
                     <span class="profile-status-dot" id="profile-status-dot"></span>
                 </button>
 
                 <!-- Cart Toggle Button -->
-                <button class="icon-btn" id="cart-toggle-btn" aria-label="Shopping Cart">
+                <button class="icon-btn" id="cart-toggle-btn" data-i18n-aria-label="header.aria.cart">
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18"/><path d="M16 10a4 4 0 0 1-8 0"/></svg>
                     <span class="cart-badge" id="cart-badge-count">0</span>
                 </button>
 
                 <!-- AI Pulse Indicator -->
-                <button class="icon-btn" id="ai-active-indicator" aria-label="AI Consultation">
+                <button class="icon-btn" id="ai-active-indicator" data-i18n-aria-label="header.aria.ai">
                     <span class="status-pulse"></span>
                     <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12c0-2.3.776-4.42 2.083-6.115"/><path d="M12 8v4l3 3"/></svg>
                 </button>
 
-                <button class="mobile-menu-toggle" id="mobile-menu-btn" aria-label="Toggle Menu">
+                <button class="mobile-menu-toggle" id="mobile-menu-btn" data-i18n-aria-label="header.aria.menu">
                     <span class="bar"></span>
                     <span class="bar"></span>
                 </button>
@@ -68,26 +76,26 @@
             <div class="hero-bg-glow"></div>
             <div class="hero-container">
                 <div class="hero-content">
-                    <span class="hero-tagline">Clinical Formulas. Live AI Consultation.</span>
-                    <h1 class="hero-title">Experience Skincare Driven by Live Science</h1>
-                    <p class="hero-desc">Discover our curated real-life skincare collections, synced dynamically with Dr. Ava—your virtual dermatologist who calculates compatibility ratings in real time. Add your OpenAI key for live conversations.</p>
+                    <span class="hero-tagline" data-i18n="hero.tagline">Clinical Formulas. Live AI Consultation.</span>
+                    <h1 class="hero-title" data-i18n="hero.title">Experience Skincare Driven by Live Science</h1>
+                    <p class="hero-desc" data-i18n="hero.desc">Discover our curated real-life skincare collections, synced dynamically with Dr. Ava—your virtual dermatologist who calculates compatibility ratings in real time. Add your OpenAI key for live conversations.</p>
                     <div class="hero-actions">
-                        <a href="#catalog" class="btn btn-primary" id="btn-explore-shop">Explore Collection</a>
-                        <button class="btn btn-secondary" id="btn-hero-consult">Take Skin Quiz</button>
+                        <a href="#catalog" class="btn btn-primary" id="btn-explore-shop" data-i18n="hero.explore">Explore Collection</a>
+                        <button class="btn btn-secondary" id="btn-hero-consult" data-i18n="hero.quiz">Take Skin Quiz</button>
                     </div>
                     
                     <div class="hero-stats">
                         <div class="stat-item">
                             <span class="stat-num">98%</span>
-                            <span class="stat-lbl">Match Precision</span>
+                            <span class="stat-lbl" data-i18n="hero.stat.match">Match Precision</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-num">OpenAI</span>
-                            <span class="stat-lbl">Live Consultation</span>
+                            <span class="stat-lbl" data-i18n="hero.stat.consult">Live Consultation</span>
                         </div>
                         <div class="stat-item">
                             <span class="stat-num">Instant</span>
-                            <span class="stat-lbl">Buy Now Bypass</span>
+                            <span class="stat-lbl" data-i18n="hero.stat.bypass">Buy Now Bypass</span>
                         </div>
                     </div>
                 </div>
@@ -98,13 +106,13 @@
                         <div class="dermatologist-card-header">
                             <img src="assets/images/dr_ava_avatar.png" alt="Dr. Ava MD" class="avatar-sm">
                             <div>
-                                <span class="dr-name">Dr. Ava</span>
-                                <span class="dr-status">Dermatology AI Consultant</span>
+                            <span class="dr-name" data-i18n="hero.card.title">Dr. Ava</span>
+                            <span class="dr-status" data-i18n="hero.card.subtitle">Dermatology AI Consultant</span>
                             </div>
                         </div>
                         <div class="dermatologist-card-body">
-                            <p class="chat-preview">"Hello! Let's take the 30-Second Skin Quiz to establish your matching scores."</p>
-                            <span class="badge badge-glow" id="hero-quiz-trigger">Start Quiz</span>
+                            <p class="chat-preview" data-i18n="hero.card.preview">"Let's find your perfect skincare match. I analyze ingredients against your unique skin profile in seconds."</p>
+                            <span class="badge badge-glow" id="hero-quiz-trigger" data-i18n="hero.card.cta">Start Quiz</span>
                         </div>
                     </div>
                     <div class="decorative-blob blob-1"></div>
@@ -117,32 +125,32 @@
         <section class="catalog" id="catalog">
             <div class="catalog-container">
                 <div class="section-header">
-                    <h2 class="section-title">The Scientific Selection</h2>
-                    <p class="section-subtitle">Dermatologist-tested formulas from top global brands. Create an account or take the quiz to see your compatibility scores.</p>
+                    <h2 class="section-title" data-i18n="catalog.title">The Scientific Selection</h2>
+                    <p class="section-subtitle" data-i18n="catalog.subtitle">Dermatologist-tested formulas from top global brands. Create an account or tell me your skin type to see personalized compatibility scores.</p>
                 </div>
 
                 <!-- Filters Control Bar -->
                 <div class="filter-bar" id="filter-bar">
                     <div class="filter-group">
-                        <span class="filter-label">Filter by Concern:</span>
+                        <span class="filter-label" data-i18n="catalog.filter.concern">Filter by Concern:</span>
                         <div class="filter-options" id="filter-concern-options">
-                            <button class="filter-btn active" data-concern="all">All Concerns</button>
-                            <button class="filter-btn" data-concern="hydration">Hydration</button>
-                            <button class="filter-btn" data-concern="anti-aging">Anti-Aging</button>
-                            <button class="filter-btn" data-concern="blemish">Blemish Control</button>
-                            <button class="filter-btn" data-concern="barrier">Barrier Repair</button>
-                            <button class="filter-btn" data-concern="spf">Sun Protection</button>
+                            <button class="filter-btn active" data-concern="all" data-i18n="catalog.filter.all">All Concerns</button>
+                            <button class="filter-btn" data-concern="hydration" data-i18n="catalog.filter.hydration">Hydration</button>
+                            <button class="filter-btn" data-concern="anti-aging" data-i18n="catalog.filter.antiaging">Anti-Aging</button>
+                            <button class="filter-btn" data-concern="blemish" data-i18n="catalog.filter.blemish">Blemish Control</button>
+                            <button class="filter-btn" data-concern="barrier" data-i18n="catalog.filter.barrier">Barrier Repair</button>
+                            <button class="filter-btn" data-concern="spf" data-i18n="catalog.filter.spf">Sun Protection</button>
                         </div>
                     </div>
                     
                     <div class="filter-group">
-                        <span class="filter-label">Your Skin Profile:</span>
+                        <span class="filter-label" data-i18n="catalog.filter.profile">Your Skin Profile:</span>
                         <div class="filter-options" id="filter-skintype-options">
-                            <button class="filter-btn active" data-skin="all">All Skin Types</button>
-                            <button class="filter-btn" data-skin="dry">Dry</button>
-                            <button class="filter-btn" data-skin="oily">Oily</button>
-                            <button class="filter-btn" data-skin="sensitive">Sensitive</button>
-                            <button class="filter-btn" data-skin="acne">Acne-Prone</button>
+                            <button class="filter-btn active" data-skin="all" data-i18n="catalog.filter.all_skin">All Skin Types</button>
+                            <button class="filter-btn" data-skin="dry" data-i18n="catalog.filter.dry">Dry</button>
+                            <button class="filter-btn" data-skin="oily" data-i18n="catalog.filter.oily">Oily</button>
+                            <button class="filter-btn" data-skin="sensitive" data-i18n="catalog.filter.sensitive">Sensitive</button>
+                            <button class="filter-btn" data-skin="acne" data-i18n="catalog.filter.acne">Acne-Prone</button>
                         </div>
                     </div>
                 </div>
@@ -184,22 +192,22 @@
                         </div>
                     </div>
                     <div class="philosophy-content">
-                        <span class="section-tag">Our Philosophy</span>
-                        <h2>Real Ingredients. Trusted Results.</h2>
-                        <p>We stock only verified, cult-favorite formulations from global skincare pioneers. No filler claims, only transparent percentages of active molecules that target specific layers of the epidermis.</p>
-                        <p>Through our synchronized AI Dermatologist Clinic, you bypass confusing product labels. Dr. Ava scans the molecular compatibility of these world-class formulations, evaluating exactly how they pair with your current skin cell cycles.</p>
+                        <span class="section-tag" data-i18n="philosophy.tag">Our Philosophy</span>
+                        <h2 data-i18n="philosophy.title">Real Ingredients. Trusted Results.</h2>
+                        <p data-i18n="philosophy.p1">We stock only verified, cult-favorite formulations from global skincare pioneers. No filler claims, only transparent percentages of active molecules that target specific layers of the epidermis.</p>
+                        <p data-i18n="philosophy.p2">Through our synchronized AI Dermatologist Clinic, you bypass confusing product labels. Dr. Ava scans the molecular compatibility of these world-class formulations, evaluating exactly how they pair with your current skin cell cycles.</p>
                         <div class="philosophy-checks">
                             <div class="check-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                <span>Curated from authentic global brand distributors</span>
+                                <span data-i18n="philosophy.check1">Curated from authentic global brand distributors</span>
                             </div>
                             <div class="check-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                <span>Match percentages calculated for dry, oily, sensitive and combination types</span>
+                                <span data-i18n="philosophy.check2">Match percentages calculated for dry, oily, sensitive and combination types</span>
                             </div>
                             <div class="check-item">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-                                <span>Zero-compromise checkout with real-time card security checks</span>
+                                <span data-i18n="philosophy.check3">Zero-compromise checkout with real-time card security checks</span>
                             </div>
                         </div>
                     </div>
@@ -220,16 +228,16 @@
                         <span class="active-dot"></span>
                     </div>
                     <div>
-                        <h3 class="doctor-name">Dr. Ava</h3>
-                        <span class="doctor-title">Clinical AI Dermatologist</span>
+                        <h3 class="doctor-name" data-i18n="ai.name">Dr. Ava</h3>
+                        <span class="doctor-title" data-i18n="ai.title">Clinical AI Dermatologist</span>
                     </div>
                 </div>
                 <div class="panel-header-actions">
                     <!-- OpenAI API Settings Toggle Button -->
-                    <button class="icon-btn" id="openai-settings-btn" title="OpenAI API Configuration" aria-label="OpenAI API Settings">
+                    <button class="icon-btn" id="openai-settings-btn" data-i18n-title="ai.settings.title" data-i18n-aria-label="ai.settings.title">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
                     </button>
-                    <button class="close-panel-btn" id="close-ai-btn" aria-label="Close AI Clinic">
+                    <button class="close-panel-btn" id="close-ai-btn" data-i18n-aria-label="ai.close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
@@ -237,27 +245,27 @@
 
             <!-- OpenAI Settings Dropdown Panel -->
             <div class="openai-config-panel" id="openai-config-panel" style="display: none;">
-                <label for="openai-api-key">Enter OpenAI API Key (Stored Locally):</label>
+                <label for="openai-api-key" data-i18n="ai.settings.label">Enter OpenAI API Key (Stored Locally):</label>
                 <div class="api-key-input-row">
-                    <input type="password" id="openai-api-key" placeholder="sk-proj-..." class="form-input">
-                    <button class="btn btn-primary" id="btn-save-openai-key">Save</button>
+                    <input type="password" id="openai-api-key" class="form-input" data-i18n="ai.settings.placeholder">
+                    <button class="btn btn-primary" id="btn-save-openai-key" data-i18n="ai.settings.save">Save</button>
                 </div>
                 <div class="api-status-row">
-                    <span class="api-status-badge simulation" id="api-status-badge">Simulation Mode</span>
-                    <button class="btn-text-action" id="btn-clear-openai-key" style="display: none;">Clear Key</button>
+                    <span class="api-status-badge simulation" id="api-status-badge" data-i18n="ai.settings.mode_simulation">Simulation Mode</span>
+                    <button class="btn-text-action" id="btn-clear-openai-key" style="display: none;" data-i18n="ai.settings.clear">Clear Key</button>
                 </div>
             </div>
             
             <!-- Context Active Card -->
             <div class="clinic-context-card" id="clinic-active-context" style="display: none;">
-                <span class="context-label">Current Consultation Focus:</span>
+                <span class="context-label" data-i18n="ai.context.label">Current Consultation Focus:</span>
                 <div class="context-item">
                     <img src="" alt="" id="context-prod-img" class="context-img">
                     <div class="context-info">
                         <span class="context-title" id="context-prod-title">Product Name</span>
                         <span class="context-details" id="context-prod-desc">Product short desc</span>
                     </div>
-                    <button class="clear-context-btn" id="clear-context-btn" title="Clear product context">
+                    <button class="clear-context-btn" id="clear-context-btn" data-i18n-title="context.clear" data-i18n-aria-label="context.clear">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
@@ -265,14 +273,14 @@
 
             <!-- Skin Type Selector in Clinic -->
             <div class="skin-selector-panel">
-                <label for="clinic-user-skin">Your Active Skin Profile:</label>
+                <label for="clinic-user-skin" data-i18n="ai.skin.label">Your Active Skin Profile:</label>
                 <select id="clinic-user-skin" class="clinic-select">
-                    <option value="unspecified">Unspecified (Take Quiz Below)</option>
-                    <option value="dry">Dry Skin</option>
-                    <option value="oily">Oily Skin</option>
-                    <option value="sensitive">Sensitive Skin</option>
-                    <option value="acne">Acne-Prone Skin</option>
-                    <option value="combination">Combination Skin</option>
+                    <option value="unspecified" data-i18n="ai.skin.unspecified">Unspecified (Tell me your skin type)</option>
+                    <option value="dry" data-i18n="ai.skin.dry">Dry Skin</option>
+                    <option value="oily" data-i18n="ai.skin.oily">Oily Skin</option>
+                    <option value="sensitive" data-i18n="ai.skin.sensitive">Sensitive Skin</option>
+                    <option value="acne" data-i18n="ai.skin.acne">Acne-Prone Skin</option>
+                    <option value="combination" data-i18n="ai.skin.combination">Combination Skin</option>
                 </select>
             </div>
 
@@ -289,7 +297,7 @@
             <!-- Input area -->
             <div class="chat-input-area">
                 <form id="chat-form" class="chat-form">
-                    <input type="text" id="chat-input" placeholder="Ask Dr. Ava about ingredients, safety, usage..." autocomplete="off" required>
+                    <input type="text" id="chat-input" data-i18n="ai.input.placeholder" placeholder="Ask me about your skin concerns, ingredients, or routines..." autocomplete="off" required>
                     <button type="submit" class="send-chat-btn" id="send-chat-btn" aria-label="Send Message">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
                     </button>
@@ -306,8 +314,8 @@
             <!-- STEP 1: REVIEW CART -->
             <div class="checkout-step-view active" id="checkout-step-1">
                 <div class="panel-header">
-                    <h3>Your Skincare Selection</h3>
-                    <button class="close-panel-btn close-cart-drawer" aria-label="Close Cart">
+                    <h3 data-i18n="cart.title">Your Skincare Selection</h3>
+                    <button class="close-panel-btn close-cart-drawer" data-i18n-aria-label="cart.close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
@@ -319,52 +327,52 @@
                 <div class="cart-footer">
                     <div class="cart-summary">
                         <div class="summary-row">
-                            <span>Subtotal</span>
+                            <span data-i18n="cart.subtotal">Subtotal</span>
                             <span class="cart-subtotal-val">$0.00</span>
                         </div>
                         <div class="summary-row shipping">
-                            <span>Standard Shipping</span>
-                            <span>Complimentary</span>
+                            <span data-i18n="cart.shipping">Standard Shipping</span>
+                            <span data-i18n="cart.shipping_free">Complimentary</span>
                         </div>
                         <hr>
                         <div class="summary-row total">
-                            <span>Total Est.</span>
+                            <span data-i18n="cart.total_est">Total Est.</span>
                             <span class="cart-total-val">$0.00</span>
                         </div>
                     </div>
-                    <button class="btn btn-primary btn-block" id="btn-proceed-shipping">Proceed to Shipping</button>
+                    <button class="btn btn-primary btn-block" id="btn-proceed-shipping" data-i18n="cart.btn.shipping">Proceed to Shipping</button>
                 </div>
             </div>
 
             <!-- STEP 2: SHIPPING DETAILS -->
             <div class="checkout-step-view" id="checkout-step-2">
                 <div class="panel-header">
-                    <h3>Shipping Address</h3>
-                    <button class="close-panel-btn close-cart-drawer" aria-label="Close Cart">
+                    <h3 data-i18n="cart.shipping.title">Shipping Address</h3>
+                    <button class="close-panel-btn close-cart-drawer" data-i18n-aria-label="cart.close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
                 
                 <form id="shipping-form" class="checkout-form-container">
                     <div class="form-group">
-                        <label for="ship-name">Full Name</label>
+                        <label for="ship-name" data-i18n="cart.shipping.name">Full Name</label>
                         <input type="text" id="ship-name" class="form-input" placeholder="Ava Sterling" required>
                     </div>
                     <div class="form-group">
-                        <label for="ship-email">Email Address</label>
+                        <label for="ship-email" data-i18n="cart.shipping.email">Email Address</label>
                         <input type="email" id="ship-email" class="form-input" placeholder="ava@example.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="ship-address">Street Address</label>
+                        <label for="ship-address" data-i18n="cart.shipping.address">Street Address</label>
                         <input type="text" id="ship-address" class="form-input" placeholder="102 Marine Boulevard" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="ship-city">City</label>
+                            <label for="ship-city" data-i18n="cart.shipping.city">City</label>
                             <input type="text" id="ship-city" class="form-input" placeholder="San Francisco" required>
                         </div>
                         <div class="form-group">
-                            <label for="ship-zip">ZIP Code</label>
+                            <label for="ship-zip" data-i18n="cart.shipping.zip">ZIP Code</label>
                             <input type="text" id="ship-zip" class="form-input" placeholder="94103" maxlength="5" required>
                         </div>
                     </div>
@@ -372,12 +380,12 @@
                 
                 <div class="cart-footer">
                     <div class="summary-row">
-                        <span>Cart Total</span>
+                        <span data-i18n="cart.total_est">Cart Total</span>
                         <span class="cart-total-val">$0.00</span>
                     </div>
                     <div class="checkout-actions">
-                        <button class="btn btn-secondary" id="btn-back-cart">Back</button>
-                        <button class="btn btn-primary" id="btn-proceed-payment">Proceed to Payment</button>
+                        <button class="btn btn-secondary" id="btn-back-cart" data-i18n="cart.btn.back">Back</button>
+                        <button class="btn btn-primary" id="btn-proceed-payment" data-i18n="cart.btn.payment">Proceed to Payment</button>
                     </div>
                 </div>
             </div>
@@ -385,8 +393,8 @@
             <!-- STEP 3: SECURE PAYMENT -->
             <div class="checkout-step-view" id="checkout-step-3">
                 <div class="panel-header">
-                    <h3>Secure Payment</h3>
-                    <button class="close-panel-btn close-cart-drawer" aria-label="Close Cart">
+                    <h3 data-i18n="cart.payment.title">Secure Payment</h3>
+                    <button class="close-panel-btn close-cart-drawer" data-i18n-aria-label="cart.close">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                     </button>
                 </div>
@@ -394,35 +402,35 @@
                 <form id="payment-form" class="checkout-form-container">
                     <div class="payment-badges-row">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="lock-icon"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
-                        <span>256-bit Encrypted SSL Transaction</span>
+                        <span data-i18n="cart.payment.secure">256-bit Encrypted SSL Transaction</span>
                     </div>
                     <div class="form-group">
-                        <label for="card-holder">Cardholder Name</label>
+                        <label for="card-holder" data-i18n="cart.payment.cardholder">Cardholder Name</label>
                         <input type="text" id="card-holder" class="form-input" placeholder="Ava Sterling" required>
                     </div>
                     <div class="form-group">
-                        <label for="card-number">Card Number</label>
+                        <label for="card-number" data-i18n="cart.payment.card_no">Card Number</label>
                         <input type="text" id="card-number" class="form-input" placeholder="4111 2222 3333 4444" maxlength="19" required>
                     </div>
                     <div class="form-row">
                         <div class="form-group">
-                            <label for="card-expiry">Expiry Date</label>
+                            <label for="card-expiry" data-i18n="cart.payment.expiry">Expiry Date</label>
                             <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY" maxlength="5" required>
                         </div>
                         <div class="form-group">
-                            <label for="card-cvv">CVV</label>
-                            <input type="password" id="card-cvv" class="form-input" placeholder="•••" maxlength="3" required>
+                            <label for="card-cvv" data-i18n="cart.payment.cvv">CVV</label>
+                            <input type="password" id="card-cvv" class="form-input" placeholder="&#8226;&#8226;&#8226;" maxlength="3" required>
                         </div>
                     </div>
                 </form>
                 
                 <div class="cart-footer">
                     <div class="summary-row total">
-                        <span>Total Charge</span>
+                        <span data-i18n="cart.payment.total">Total Charge</span>
                         <span class="cart-total-val">$0.00</span>
                     </div>
                     <div class="checkout-actions">
-                        <button class="btn btn-secondary" id="btn-back-shipping">Back</button>
+                        <button class="btn btn-secondary" id="btn-back-shipping" data-i18n="cart.btn.back">Back</button>
                         <button class="btn btn-primary" id="btn-submit-order">Place Order</button>
                     </div>
                 </div>
@@ -435,44 +443,44 @@
     <div class="modal" id="profile-modal" aria-hidden="true">
         <div class="modal-overlay" id="profile-modal-overlay"></div>
         <div class="modal-content glass profile-modal-content">
-            <button class="close-modal-x" id="close-profile-btn" aria-label="Close Profile">
+            <button class="close-modal-x" id="close-profile-btn" data-i18n-aria-label="profile.close">
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
             </button>
 
             <!-- PROFILE LOGGED OUT FORM -->
             <div class="profile-auth-view active" id="profile-logged-out">
-                <h2 id="auth-title">Create Skincare Profile</h2>
-                <p id="auth-subtitle">Unlock custom molecular compatibility scores and save your diagnostic logs.</p>
+                <h2 id="auth-title" data-i18n="auth.title.register">Create Skincare Profile</h2>
+                <p id="auth-subtitle" data-i18n="auth.subtitle.register">Save your skin profile and get personalized recommendations every time you visit.</p>
                 
                 <form id="auth-form" class="auth-form-container">
                     <div class="form-group" id="group-auth-name">
-                        <label for="auth-name">Your Name</label>
+                        <label for="auth-name" data-i18n="auth.label.name">Your Name</label>
                         <input type="text" id="auth-name" class="form-input" placeholder="Ava Sterling" required>
                     </div>
                     <div class="form-group">
-                        <label for="auth-email">Email Address</label>
+                        <label for="auth-email" data-i18n="auth.label.email">Email Address</label>
                         <input type="email" id="auth-email" class="form-input" placeholder="ava@example.com" required>
                     </div>
                     <div class="form-group">
-                        <label for="auth-password">Password</label>
-                        <input type="password" id="auth-password" class="form-input" placeholder="••••••••" required>
+                        <label for="auth-password" data-i18n="auth.label.password">Password</label>
+                        <input type="password" id="auth-password" class="form-input" placeholder="&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;&#8226;" required>
                     </div>
                     <div class="form-group" id="group-auth-skin">
-                        <label for="auth-skin">Your Known Skin Type</label>
+                        <label for="auth-skin" data-i18n="auth.label.skin">Your Known Skin Type</label>
                         <select id="auth-skin" class="clinic-select form-input-select">
-                            <option value="unspecified">Unspecified (Do Skin Quiz Later)</option>
-                            <option value="dry">Dry Skin</option>
-                            <option value="oily">Oily Skin</option>
-                            <option value="sensitive">Sensitive Skin</option>
-                            <option value="acne">Acne-Prone Skin</option>
-                            <option value="combination">Combination Skin</option>
+                            <option value="unspecified" data-i18n="auth.skin.unspecified">Not sure yet (I&#8217;ll help you figure it out)</option>
+                            <option value="dry" data-i18n="ai.skin.dry">Dry Skin</option>
+                            <option value="oily" data-i18n="ai.skin.oily">Oily Skin</option>
+                            <option value="sensitive" data-i18n="ai.skin.sensitive">Sensitive Skin</option>
+                            <option value="acne" data-i18n="ai.skin.acne">Acne-Prone Skin</option>
+                            <option value="combination" data-i18n="ai.skin.combination">Combination Skin</option>
                         </select>
                     </div>
-                    <button type="submit" class="btn btn-primary btn-block" id="btn-auth-submit">Create Profile</button>
+                    <button type="submit" class="btn btn-primary btn-block" id="btn-auth-submit" data-i18n="auth.btn.register">Create Profile</button>
                 </form>
                 
                 <div class="auth-toggle-link-wrap">
-                    <a href="#" id="auth-toggle-link">Already have an account? Log In</a>
+                    <a href="#" id="auth-toggle-link" data-i18n="auth.toggle.login">Already have an account? Log In</a>
                 </div>
             </div>
 
@@ -483,31 +491,31 @@
                         <span id="profile-initials">AS</span>
                     </div>
                     <h2 id="user-display-name">Ava Sterling</h2>
-                    <span class="user-tier-badge">Gold Tier Member</span>
+                    <span class="user-tier-badge" data-i18n="auth.logged_in.tier">Gold Tier Member</span>
                 </div>
 
                 <div class="profile-details-list">
                     <div class="profile-detail-item">
-                        <span class="detail-label">Registered Skin Profile</span>
+                        <span class="detail-label" data-i18n="auth.logged_in.skin_label">Registered Skin Profile</span>
                         <div class="detail-val-wrap">
                             <span class="detail-value" id="profile-skin-display">Sensitive Skin</span>
-                            <button class="btn-text-action" id="profile-quiz-retrigger">Retake Quiz</button>
+                            <button class="btn-text-action" id="profile-quiz-retrigger" data-i18n="auth.btn.retake_quiz">Retake Quiz</button>
                         </div>
                     </div>
                     <div class="profile-detail-item">
-                        <span class="detail-label">Loyalty Rewards</span>
+                        <span class="detail-label" data-i18n="auth.logged_in.points_label">Loyalty Rewards</span>
                         <span class="detail-value text-gold" id="profile-points-display">150 Glow Points</span>
                     </div>
                     <div class="profile-detail-item">
-                        <span class="detail-label">Prescription History</span>
+                        <span class="detail-label" data-i18n="auth.logged_in.history_label">Prescription History</span>
                         <div class="prescription-notes-container" id="profile-prescriptions">
-                            <p class="empty-note">No consultation reports saved yet. Complete a quiz to receive recommendations.</p>
+                            <p class="empty-note" data-i18n="auth.logged_in.empty">No consultation reports saved yet. Take the quiz to get personalized recommendations.</p>
                         </div>
                     </div>
                 </div>
 
                 <div class="profile-actions-wrap">
-                    <button class="btn btn-secondary btn-block" id="btn-logout">Logout Profile</button>
+                    <button class="btn btn-secondary btn-block" id="btn-logout" data-i18n="auth.btn.logout">Logout Profile</button>
                 </div>
             </div>
 
@@ -515,7 +523,7 @@
     </div>
 
     <!-- Floating Action Button (FAB) for AI Dermatologist -->
-    <button class="ai-fab" id="ai-fab" aria-label="Consult Dr. Ava">
+    <button class="ai-fab" id="ai-fab" data-i18n-aria-label="fab.consult">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
         </svg>
@@ -532,9 +540,9 @@
             <div class="success-icon-wrap">
                 <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
             </div>
-            <h2>Skincare Preparation Order</h2>
-            <p>Thank you for shopping at Beautify. Your dermatological selection is being carefully packed. Dr. Ava's usage instructions and compatibility calculations are enclosed.</p>
-            <button class="btn btn-primary" id="close-modal-btn">Continue Exploring</button>
+            <h2 data-i18n="success.title">Order Confirmed!</h2>
+            <p data-i18n="success.message">Thank you for shopping at Beautify. Your dermatologist-approved selection is being carefully packed. Dr. Ava's usage instructions are included in your package.</p>
+            <button class="btn btn-primary" id="close-modal-btn" data-i18n="success.cta">Continue Exploring</button>
         </div>
     </div>
 
@@ -543,26 +551,27 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <a href="#" class="logo">Beautify<span class="dot">.</span></a>
-                <p>Curating real skincare science with dynamic molecular skin matching algorithms.</p>
+                <p data-i18n="footer.desc">Curating real skincare science with dynamic molecular skin matching algorithms.</p>
             </div>
             <div class="footer-links">
-                <h4>Explore</h4>
-                <a href="#hero">Home</a>
-                <a href="#catalog">Shop Collection</a>
-                <a href="#philosophy">Science & Philosophy</a>
+                <h4 data-i18n="footer.explore">Explore</h4>
+                <a href="#hero" data-i18n="nav.home">Home</a>
+                <a href="#catalog" data-i18n="nav.shop">Shop Collection</a>
+                <a href="#philosophy" data-i18n="nav.science">Science & Philosophy</a>
             </div>
             <div class="footer-contact">
-                <h4>Support</h4>
-                <p>Support & Orders: customercare@beautify.in</p>
-                <p>Clinical Team: dr.ava@beautify.in</p>
+                <h4 data-i18n="footer.support">Support</h4>
+                <p data-i18n="footer.support_email">Support & Orders: customercare@beautify.in</p>
+                <p data-i18n="footer.clinic_email">Clinical Team: dr.ava@beautify.in</p>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Beautify. All rights reserved. Registered skincare matching demonstration platform.</p>
+            <p data-i18n="footer.copyright">&copy; 2026 Beautify. All rights reserved. Registered skincare matching demonstration platform.</p>
         </div>
     </footer>
 
-    <!-- Script file -->
+    <!-- Script files -->
+    <script src="i18n.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
