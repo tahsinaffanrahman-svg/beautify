@@ -577,10 +577,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     <span class="product-suitability">${product.skinTypes.join(" • ")} ${i18n.t("catalog.product.skin")}</span>
                     <h3 class="product-title" style="font-size: 1.45rem;">${product.name}</h3>
                     <span class="product-price">$${product.price.toFixed(2)}</span>
-                    <p class="product-desc" style="margin-bottom: 12px;">${product.description}</p>
+                    <p class="product-desc" style="margin-bottom: 12px;">${i18n.t("product." + product.id + ".desc")}</p>
                     <div class="product-ingredients" style="margin-bottom: 16px;">
                         <span class="ingredient-label">${i18n.t("catalog.product.actives")}</span>
-                        <span class="ingredient-text">${product.activeIngredients}</span>
+                        <span class="ingredient-text">${i18n.t("product." + product.id + ".ingredients")}</span>
                     </div>
                     <div class="product-actions">
                         <div class="product-actions-row">
@@ -700,7 +700,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <img src="${item.product.image}" alt="${item.product.name}" class="cart-item-img">
                     <div class="cart-item-details">
                         <div class="cart-item-title">${item.product.name}</div>
-                        <div class="cart-item-desc">${item.product.activeIngredients.split(",")[0]}</div>
+                        <div class="cart-item-desc">${i18n.t("product." + item.product.id + ".ingredients").split(",")[0]}</div>
                         <div class="cart-item-price">$${(item.product.price * item.quantity).toFixed(2)}</div>
                         <div class="cart-item-controls">
                             <div class="quantity-picker">
@@ -956,7 +956,7 @@ document.addEventListener("DOMContentLoaded", () => {
         contextProdImg.src = product.image;
         contextProdImg.alt = product.name;
         contextProdTitle.innerText = product.name;
-        contextProdDesc.innerText = product.description.substring(0, 75) + "...";
+        contextProdDesc.innerText = i18n.t("product." + product.id + ".desc").substring(0, 75) + "...";
         clinicActiveContext.style.display = "block";
         
         toggleAiClinic(true);
@@ -1048,7 +1048,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const noteEl = document.createElement("div");
             noteEl.className = "clinical-recommendation";
             noteEl.innerHTML = `
-                <span class="recommendation-title">Dr. Ava's Prescription Tip</span>
+                <span class="recommendation-title">${i18n.t("chat.prescription_tip")}</span>
                 <p>${clinicalNote}</p>
             `;
             bubble.appendChild(noteEl);
@@ -1356,7 +1356,7 @@ document.addEventListener("DOMContentLoaded", () => {
             // Inject reply with product note snippet if focusing on a product
             let clinicalNote = null;
             if (activeProductContext) {
-                clinicalNote = activeProductContext.clinicalNote;
+                clinicalNote = i18n.t("product." + activeProductContext.id + ".clinical");
             }
             appendMessage("doctor", replyText, clinicalNote);
             populateSuggestions(activeProductContext);
@@ -1399,7 +1399,7 @@ document.addEventListener("DOMContentLoaded", () => {
             case "combination":
                 return `For <strong>combination skin</strong>, zone-application is key. Apply oil control (The Ordinary Niacinamide) to shiny forehead and nose areas, but apply peptide renewal (Drunk Elephant Protini) to dry cheek layers.`;
             default:
-                return avaResponses.general[1];
+                return i18n.t("response.skin_advice.default");
         }
     }
 
@@ -1411,8 +1411,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (q.includes("safe") || q.includes("suitable") || q.includes("compatible")) {
                 if (skinType === "unspecified") {
                     return {
-                        text: i18n.t("response.safety.unspecified", { product: product.name, safety: product.safetyProfile }),
-                        clinicalNote: product.clinicalNote
+                        text: i18n.t("response.safety.unspecified", { product: product.name, safety: i18n.t("product." + product.id + ".safety") }),
+                        clinicalNote: i18n.t("product." + product.id + ".clinical")
                     };
                 }
                 const isCompatible = product.skinTypes.includes(skinType);
@@ -1420,21 +1420,21 @@ document.addEventListener("DOMContentLoaded", () => {
                     text: isCompatible 
                         ? i18n.t("response.safety.compatible", { product: product.name, skinType: fmtSkin })
                         : i18n.t("response.safety.caution", { product: product.name, skinType: fmtSkin }),
-                    clinicalNote: product.clinicalNote
+                    clinicalNote: i18n.t("product." + product.id + ".clinical")
                 };
             }
             
             if (q.includes("apply") || q.includes("how to use") || q.includes("directions") || q.includes("use this")) {
                 return {
-                    text: i18n.t("response.usage", { product: product.name, instructions: product.useInstructions }),
-                    clinicalNote: "Skincare requires 28 days (one full cell-turnover cycle) to display macro results."
+                    text: i18n.t("response.usage", { product: product.name, instructions: i18n.t("product." + product.id + ".instructions") }),
+                    clinicalNote: i18n.t("clinical_note.28_days")
                 };
             }
             
             if (q.includes("ingredients") || q.includes("actives") || q.includes("contain") || q.includes("what is") || q.includes("molecule")) {
                 return {
-                    text: i18n.t("response.ingredients", { product: product.name, ingredients: product.activeIngredients }),
-                    clinicalNote: "Beautify products are strictly clean, cruelty-free, and paraben-free."
+                    text: i18n.t("response.ingredients", { product: product.name, ingredients: i18n.t("product." + product.id + ".ingredients") }),
+                    clinicalNote: i18n.t("clinical_note.clean")
                 };
             }
 
@@ -1442,12 +1442,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (product.id === 4 || product.id === 8) {
                     return {
                         text: i18n.t("response.retinol.caution", { product: product.name }),
-                        clinicalNote: "Always keep strong acids and retinol separated to prevent chemical skin irritation."
+                        clinicalNote: i18n.t("clinical_note.acids_retinol")
                     };
                 }
                 return {
                     text: i18n.t("response.retinol.safe", { product: product.name }),
-                    clinicalNote: "Apply your hydrating layer first, let absorb, then apply Retinol."
+                    clinicalNote: i18n.t("clinical_note.hydrate_first")
                 };
             }
         }
@@ -1455,41 +1455,41 @@ document.addEventListener("DOMContentLoaded", () => {
         if (q.includes("hydrate") || q.includes("dry") || q.includes("moisturize") || q.includes("hydration")) {
             return {
                 text: i18n.t("response.hydration"),
-                clinicalNote: "Always apply hydrating serums to slightly damp skin to maximize absorption."
+                clinicalNote: i18n.t("clinical_note.damp_skin")
             };
         }
 
         if (q.includes("acne") || q.includes("blemish") || q.includes("pimple") || q.includes("oily")) {
             return {
                 text: i18n.t("response.acne"),
-                clinicalNote: "Zinc helps reduce blemish swelling, while BHA clears blockages."
+                clinicalNote: i18n.t("clinical_note.zinc_bha")
             };
         }
 
         if (q.includes("barrier") || q.includes("irritat") || q.includes("red") || q.includes("sensitive") || q.includes("eczema")) {
             return {
                 text: i18n.t("response.barrier"),
-                clinicalNote: "Isolate high-strength retinols or ascorbic acids until stinging stops."
+                clinicalNote: i18n.t("clinical_note.isolate_retinols")
             };
         }
 
         if (q.includes("aging") || q.includes("wrinkle") || q.includes("line") || q.includes("renew")) {
             return {
                 text: i18n.t("response.aging"),
-                clinicalNote: "Combine with sunscreen SPF 60 daily to prevent sun-induced collagen loss."
+                clinicalNote: i18n.t("clinical_note.sunscreen_spf")
             };
         }
 
         if (q.includes("sunscreen") || q.includes("spf") || q.includes("sun") || q.includes("uv")) {
             return {
                 text: i18n.t("response.spf"),
-                clinicalNote: "Sunscreen is the final mandatory step of every morning skincare routine."
+                clinicalNote: i18n.t("clinical_note.sunscreen_mandatory")
             };
         }
 
         return {
             text: i18n.t("response.fallback"),
-            clinicalNote: "Select the quiz above to calculate compatibility ratings."
+            clinicalNote: i18n.t("clinical_note.take_quiz")
         };
     }
 
