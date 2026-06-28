@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beautify | Luxury Skincare, Live Cart & Real-Time AI Dermatologist</title>
-    <meta name="description" content="Shop real-life, dermatologist-approved skincare formulations at Beautify. Experience live checkouts, profile tracking, and instant OpenAI-powered clinical consultations.">
+    <title data-i18n="meta.title">Beautify | Luxury Skincare, Live Cart & Real-Time AI Dermatologist</title>
+    <meta name="description" data-i18n-content="meta.description" content="Shop real-life, dermatologist-approved skincare formulations at Beautify. Experience live checkouts, profile tracking, and instant OpenAI-powered clinical consultations.">
     
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -30,11 +30,11 @@
             
             <div class="header-actions">
                 <!-- Language Selector -->
-                <select class="lang-selector" id="lang-selector" aria-label="Select Language">
-                    <option value="en">EN</option>
-                    <option value="es">ES</option>
-                    <option value="hi">HI</option>
-                    <option value="bn">BN</option>
+                <select class="lang-selector" id="lang-selector" data-i18n-aria-label="lang.label">
+                    <option value="en" data-i18n="lang.en">English</option>
+                    <option value="es" data-i18n="lang.es">Español</option>
+                    <option value="hi" data-i18n="lang.hi">हिन्दी</option>
+                    <option value="bn" data-i18n="lang.bn">বাংলা</option>
                 </select>
 
                 <!-- Theme Toggle Button -->
@@ -90,11 +90,11 @@
                             <span class="stat-lbl" data-i18n="hero.stat.match">Match Precision</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num">OpenAI</span>
+                            <span class="stat-num" data-i18n="hero.stat.openai">OpenAI</span>
                             <span class="stat-lbl" data-i18n="hero.stat.consult">Live Consultation</span>
                         </div>
                         <div class="stat-item">
-                            <span class="stat-num">Instant</span>
+                            <span class="stat-num" data-i18n="hero.stat.instant">Instant</span>
                             <span class="stat-lbl" data-i18n="hero.stat.bypass">Buy Now Bypass</span>
                         </div>
                     </div>
@@ -168,26 +168,26 @@
                 <div class="philosophy-grid">
                     <div class="philosophy-visual">
                         <div class="glass-science-card">
-                            <h3>Actives Concentration</h3>
+                            <h3 data-i18n="philosophy.actives_heading">Actives Concentration</h3>
                             <div class="ingredient-row">
                                 <span class="ing-name">Snail Secretion Filtrate</span>
                                 <div class="ing-bar"><span class="ing-fill" style="width: 96%;"></span></div>
-                                <span class="ing-pct">96% Potency</span>
+                                <span class="ing-pct" data-i18n="philosophy.pct_96">96% Potency</span>
                             </div>
                             <div class="ingredient-row">
                                 <span class="ing-name">Niacinamide (Vitamin B3)</span>
                                 <div class="ing-bar"><span class="ing-fill" style="width: 75%;"></span></div>
-                                <span class="ing-pct">10% Concentration</span>
+                                <span class="ing-pct" data-i18n="philosophy.pct_10">10% Concentration</span>
                             </div>
                             <div class="ingredient-row">
                                 <span class="ing-name">Salicylic Acid (BHA)</span>
                                 <div class="ing-bar"><span class="ing-fill" style="width: 60%;"></span></div>
-                                <span class="ing-pct">2% Concentration</span>
+                                <span class="ing-pct" data-i18n="philosophy.pct_2">2% Concentration</span>
                             </div>
                             <div class="ingredient-row">
                                 <span class="ing-name">Glycolic & Lactic Acids</span>
                                 <div class="ing-bar"><span class="ing-fill" style="width: 90%;"></span></div>
-                                <span class="ing-pct">30% Concentration</span>
+                                <span class="ing-pct" data-i18n="philosophy.pct_30">30% Concentration</span>
                             </div>
                         </div>
                     </div>
@@ -262,8 +262,8 @@
                 <div class="context-item">
                     <img src="" alt="" id="context-prod-img" class="context-img">
                     <div class="context-info">
-                        <span class="context-title" id="context-prod-title">Product Name</span>
-                        <span class="context-details" id="context-prod-desc">Product short desc</span>
+                        <span class="context-title" id="context-prod-title" data-i18n="context.prod_name">Product Name</span>
+                        <span class="context-details" id="context-prod-desc" data-i18n="context.prod_desc">Product short desc</span>
                     </div>
                     <button class="clear-context-btn" id="clear-context-btn" data-i18n-title="context.clear" data-i18n-aria-label="context.clear">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -356,7 +356,7 @@
                 <form id="shipping-form" class="checkout-form-container">
                     <div class="form-group">
                         <label for="ship-name" data-i18n="cart.shipping.name">Full Name</label>
-                        <input type="text" id="ship-name" class="form-input" placeholder="Ava Sterling" required>
+                        <input type="text" id="ship-name" class="form-input" placeholder="Ava Sterling" data-i18n="placeholder.ship_name" required>
                     </div>
                     <div class="form-group">
                         <label for="ship-email" data-i18n="cart.shipping.email">Email Address</label>
@@ -406,7 +406,7 @@
                     </div>
                     <div class="form-group">
                         <label for="card-holder" data-i18n="cart.payment.cardholder">Cardholder Name</label>
-                        <input type="text" id="card-holder" class="form-input" placeholder="Ava Sterling" required>
+                        <input type="text" id="card-holder" class="form-input" placeholder="Ava Sterling" data-i18n="placeholder.card_holder" required>
                     </div>
                     <div class="form-group">
                         <label for="card-number" data-i18n="cart.payment.card_no">Card Number</label>
@@ -415,7 +415,7 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="card-expiry" data-i18n="cart.payment.expiry">Expiry Date</label>
-                            <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY" maxlength="5" required>
+                            <input type="text" id="card-expiry" class="form-input" placeholder="MM/YY" data-i18n="placeholder.expiry" maxlength="5" required>
                         </div>
                         <div class="form-group">
                             <label for="card-cvv" data-i18n="cart.payment.cvv">CVV</label>
@@ -431,7 +431,7 @@
                     </div>
                     <div class="checkout-actions">
                         <button class="btn btn-secondary" id="btn-back-shipping" data-i18n="cart.btn.back">Back</button>
-                        <button class="btn btn-primary" id="btn-submit-order">Place Order</button>
+                        <button class="btn btn-primary" id="btn-submit-order" data-i18n="cart.btn.place_order">Place Order</button>
                     </div>
                 </div>
             </div>
@@ -455,7 +455,7 @@
                 <form id="auth-form" class="auth-form-container">
                     <div class="form-group" id="group-auth-name">
                         <label for="auth-name" data-i18n="auth.label.name">Your Name</label>
-                        <input type="text" id="auth-name" class="form-input" placeholder="Ava Sterling" required>
+                        <input type="text" id="auth-name" class="form-input" placeholder="Ava Sterling" data-i18n="placeholder.auth_name" required>
                     </div>
                     <div class="form-group">
                         <label for="auth-email" data-i18n="auth.label.email">Email Address</label>

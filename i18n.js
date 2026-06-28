@@ -239,6 +239,21 @@
             "footer.support": "Support",
             "footer.support_email": "Support & Orders: customercare@beautify.in",
             "footer.clinic_email": "Clinical Team: dr.ava@beautify.in",
+            "meta.title": "Beautify | Luxury Skincare, Live Cart & Real-Time AI Dermatologist",
+            "meta.description": "Shop real-life, dermatologist-approved skincare formulations at Beautify. Experience live checkouts, profile tracking, and instant OpenAI-powered clinical consultations.",
+            "hero.stat.openai": "OpenAI",
+            "hero.stat.instant": "Instant",
+            "philosophy.actives_heading": "Actives Concentration",
+            "philosophy.pct_96": "96% Potency",
+            "philosophy.pct_10": "10% Concentration",
+            "philosophy.pct_2": "2% Concentration",
+            "philosophy.pct_30": "30% Concentration",
+            "context.prod_name": "Product Name",
+            "context.prod_desc": "Product short desc",
+            "placeholder.ship_name": "Ava Sterling",
+            "placeholder.card_holder": "Ava Sterling",
+            "placeholder.auth_name": "Ava Sterling",
+            "placeholder.expiry": "MM/YY",
             "footer.copyright": "\u00a9 2026 Beautify. All rights reserved."
         },
         "es": {
@@ -467,6 +482,21 @@
             "footer.support": "Soporte",
             "footer.support_email": "customercare@beautify.in",
             "footer.clinic_email": "dr.ava@beautify.in",
+            "meta.title": "Beautify | Cuidado de la Piel de Lujo, Carrito en Vivo y Dermat\u00f3logo IA en Tiempo Real",
+            "meta.description": "Compra formulaciones reales de cuidado de la piel aprobadas por dermat\u00f3logos en Beautify. Experimenta pagos en vivo, seguimiento de perfil y consultas cl\u00ednicas instant\u00e1neas impulsadas por OpenAI.",
+            "hero.stat.openai": "OpenAI",
+            "hero.stat.instant": "Instant\u00e1neo",
+            "philosophy.actives_heading": "Concentraci\u00f3n de Activos",
+            "philosophy.pct_96": "96% Potencia",
+            "philosophy.pct_10": "10% Concentraci\u00f3n",
+            "philosophy.pct_2": "2% Concentraci\u00f3n",
+            "philosophy.pct_30": "30% Concentraci\u00f3n",
+            "context.prod_name": "Nombre del Producto",
+            "context.prod_desc": "Descripci\u00f3n breve",
+            "placeholder.ship_name": "Ava Sterling",
+            "placeholder.card_holder": "Ava Sterling",
+            "placeholder.auth_name": "Ava Sterling",
+            "placeholder.expiry": "MM/AA",
             "footer.copyright": "\u00a9 2026 Beautify."
         },
         "hi": {
@@ -695,6 +725,21 @@
             "footer.support": "\u0938\u0939\u093e\u092f\u0924\u093e",
             "footer.support_email": "Support & Orders: customercare@beautify.in",
             "footer.clinic_email": "Clinical Team: dr.ava@beautify.in",
+            "meta.title": "Beautify | \u0932\u0915\u094d\u091c\u093c\u094d\u0930\u0940 \u0938\u094d\u0915\u093f\u0928\u0915\u0947\u092f\u0930, \u0932\u093e\u0907\u0935 \u0915\u093e\u0930\u094d\u091f \u0914\u0930 \u0930\u093f\u092f\u0932-\u091f\u093e\u0907\u092e AI \u0921\u0930\u094d\u092e\u0947\u091f\u094b\u0932\u0949\u091c\u093f\u0938\u094d\u091f",
+            "meta.description": "Beautify \u092a\u0930 \u0921\u0930\u094d\u092e\u0947\u091f\u094b\u0932\u0949\u091c\u093f\u0938\u094d\u091f-\u0905\u0928\u0941\u092e\u094b\u0926\u093f\u0924 \u0935\u093e\u0938\u094d\u0924\u0935\u093f\u0915 \u0938\u094d\u0915\u093f\u0928\u0915\u0947\u092f\u0930 \u092b\u093c\u0949\u0930\u094d\u092e\u0942\u0932\u0947\u0936\u0928 \u0916\u0930\u0940\u0926\u0947\u0902\u0964 \u0932\u093e\u0907\u0935 \u091a\u0947\u0915\u0906\u0909\u091f, \u092a\u094d\u0930\u094b\u092b\u093c\u093e\u0907\u0932 \u091f\u094d\u0930\u0948\u0915\u093f\u0902\u0917 \u0914\u0930 OpenAI-\u0938\u0902\u091a\u093e\u0932\u093f\u0924 \u0915\u094d\u0932\u093f\u0928\u093f\u0915\u0932 \u092a\u0930\u093e\u092e\u0930\u094d\u0936 \u0915\u093e \u0905\u0928\u0941\u092d\u0935 \u0915\u0930\u0947\u0902\u0964",
+            "hero.stat.openai": "OpenAI",
+            "hero.stat.instant": "\u0924\u0941\u0930\u0902\u0924",
+            "philosophy.actives_heading": "\u0938\u0915\u094d\u0930\u093f\u092f \u0924\u0924\u094d\u0935 \u0938\u093e\u0902\u0926\u094d\u0930\u0924\u093e",
+            "philosophy.pct_96": "96% \u0915\u094d\u0937\u092e\u0924\u093e",
+            "philosophy.pct_10": "10% \u0938\u093e\u0902\u0926\u094d\u0930\u0924\u093e",
+            "philosophy.pct_2": "2% \u0938\u093e\u0902\u0926\u094d\u0930\u0924\u093e",
+            "philosophy.pct_30": "30% \u0938\u093e\u0902\u0926\u094d\u0930\u0924\u093e",
+            "context.prod_name": "\u0909\u0924\u094d\u092a\u093e\u0926 \u0915\u093e \u0928\u093e\u092e",
+            "context.prod_desc": "\u0909\u0924\u094d\u092a\u093e\u0926 \u0938\u0902\u0915\u094d\u0937\u093f\u092a\u094d\u0924 \u0935\u093f\u0935\u0930\u0923",
+            "placeholder.ship_name": "Ava Sterling",
+            "placeholder.card_holder": "Ava Sterling",
+            "placeholder.auth_name": "Ava Sterling",
+            "placeholder.expiry": "\u092e\u093e\u0939/\u0935\u0930\u094d\u0937",
             "footer.copyright": "\u00a9 2026 Beautify\u0964 \u0938\u092d\u0940 \u0905\u0927\u093f\u0915\u093e\u0930 \u0938\u0941\u0930\u0915\u094d\u0937\u093f\u0924\u0964"
         },
         "bn": {
@@ -923,6 +968,21 @@
             "footer.support": "\u09b8\u09b9\u09be\u09af\u09bc\u09a4\u09be",
             "footer.support_email": "Support & Orders: customercare@beautify.in",
             "footer.clinic_email": "Clinical Team: dr.ava@beautify.in",
+            "meta.title": "Beautify | \u09ac\u09bf\u09b2\u09be\u09b8\u09ac\u09b9\u09c1\u09b2 \u09b8\u09cd\u0995\u09bf\u09a8\u0995\u09c7\u09af\u09bc\u09be\u09b0, \u09b2\u09be\u0987\u09ad \u0995\u09be\u09b0\u09cd\u099f \u0993 \u09b0\u09bf\u09af\u09bc\u09c7\u09b2-\u099f\u09be\u0987\u09ae AI \u09a1\u09be\u09b0\u09cd\u09ae\u09be\u099f\u09cb\u09b2\u099c\u09bf\u09b8\u09cd\u099f",
+            "meta.description": "Beautify-\u098f \u09a1\u09be\u09b0\u09cd\u09ae\u09be\u099f\u09cb\u09b2\u099c\u09bf\u09b8\u09cd\u099f-\u0985\u09a8\u09c1\u09ae\u09cb\u09a6\u09bf\u09a4 \u09ac\u09be\u09b8\u09cd\u09a4\u09ac \u09b8\u09cd\u0995\u09bf\u09a8\u0995\u09c7\u09af\u09bc\u09be\u09b0 \u09ab\u09b0\u09cd\u09ae\u09c1\u09b2\u09c7\u09b6\u09a8 \u0995\u09bf\u09a8\u09c1\u09a8\u0964 \u09b2\u09be\u0987\u09ad \u099a\u09c7\u0995\u0986\u0989\u099f, \u09aa\u09cd\u09b0\u09cb\u09ab\u09be\u0987\u09b2 \u099f\u09cd\u09b0\u09cd\u09af\u09be\u0995\u09bf\u0982 \u0993 OpenAI-\u099a\u09be\u09b2\u09bf\u09a4 \u0995\u09cd\u09b2\u09bf\u09a8\u09bf\u0995\u09cd\u09af\u09be\u09b2 \u09aa\u09b0\u09be\u09ae\u09b0\u09cd\u09b6 \u0985\u09a8\u09c1\u09ad\u09ac \u0995\u09b0\u09c1\u09a8\u0964",
+            "hero.stat.openai": "OpenAI",
+            "hero.stat.instant": "\u09a4\u09be\u09a4\u09cd\u0995\u09cd\u09b7\u09a3\u09bf\u0995",
+            "philosophy.actives_heading": "\u09b8\u0995\u09cd\u09b0\u09bf\u09af\u09bc \u0989\u09aa\u09be\u09a6\u09be\u09a8\u09c7\u09b0 \u0998\u09a8\u09a4\u09cd\u09ac",
+            "philosophy.pct_96": "96% \u0995\u09cd\u09b7\u09ae\u09a4\u09be",
+            "philosophy.pct_10": "10% \u0998\u09a8\u09a4\u09cd\u09ac",
+            "philosophy.pct_2": "2% \u0998\u09a9\u09a4\u09cd\u09ac",
+            "philosophy.pct_30": "30% \u0998\u09a8\u09a4\u09cd\u09ac",
+            "context.prod_name": "\u09aa\u09a3\u09cd\u09af\u09c7\u09b0 \u09a8\u09be\u09ae",
+            "context.prod_desc": "\u09aa\u09a3\u09cd\u09af\u09c7\u09b0 \u09b8\u0982\u0995\u09cd\u09b7\u09bf\u09aa\u09cd\u09a4 \u09ac\u09b0\u09cd\u09a3\u09a8\u09be",
+            "placeholder.ship_name": "Ava Sterling",
+            "placeholder.card_holder": "Ava Sterling",
+            "placeholder.auth_name": "Ava Sterling",
+            "placeholder.expiry": "\u09ae\u09be\u09b8/\u09ac\u099b\u09b0",
             "footer.copyright": "\u00a9 2026 Beautify\u0964 \u09b8\u0995\u09b2 \u0985\u09a7\u09bf\u0995\u09be\u09b0 \u09b8\u0982\u09b0\u0995\u09cd\u09b7\u09bf\u09a4\u0964"
         },
     };
@@ -1000,6 +1060,10 @@
         var valueEls = document.querySelectorAll('[data-i18n-value]');
         for (var m = 0; m < valueEls.length; m++) {
             valueEls[m].setAttribute('value', t(valueEls[m].getAttribute('data-i18n-value')));
+        }
+        var contentEls = document.querySelectorAll('[data-i18n-content]');
+        for (var n = 0; n < contentEls.length; n++) {
+            contentEls[n].setAttribute('content', t(contentEls[n].getAttribute('data-i18n-content')));
         }
     }
 
