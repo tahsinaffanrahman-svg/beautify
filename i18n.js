@@ -316,7 +316,7 @@
             "product.10.ingredients": "Ceramides 1/3/6-II, Hyaluronic Acid, Glycerin",
             "product.10.clinical": "Non-foaming lotion wash. Keeps the protective moisture barrier completely intact during cleansing.",
             "product.10.instructions": "Wet skin with lukewarm water. Massage cleanser in circular motions. Rinse thoroughly.",
-            "product.10.safety": "Fragrance-free, soap-free, non-comedogenic, safe for highly sensitized skin."
+            "product.10.safety": "Fragrance-free, soap-free, non-comedogenic, safe for highly sensitized skin.",
             "product.11.desc": "A potent antioxidant serum combining 15% pure Vitamin C, 1% Vitamin E, and 0.5% Ferulic Acid to neutralize free radicals, brighten skin, and reduce signs of aging.",
             "product.11.ingredients": "L-Ascorbic Acid (15%), Alpha Tocopherol (1%), Ferulic Acid (0.5%), Hyaluronic Acid",
             "product.11.clinical": "Gold-standard vitamin C serum. Ferulic acid doubles antioxidant protection. Store in cool, dark place.",
