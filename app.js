@@ -814,6 +814,7 @@ let currentUser = null;
 let activeProductContext = null;
 let currentConcernFilter = "all";
 let currentSkinFilter = "all";
+let currentSearchQuery = "";
 
 // Chat conversation logs (for OpenAI API key state)
 let chatHistory = [];
@@ -971,6 +972,79 @@ document.addEventListener("DOMContentLoaded", () => {
 
     initTheme();
 
+    // Floating Search
+    const searchFab = document.getElementById("search-fab");
+    const searchOverlay = document.getElementById("search-overlay");
+    const searchOverlayClose = document.getElementById("search-overlay-close");
+    const searchOverlayResults = document.getElementById("search-overlay-results");
+    const searchInput = document.getElementById("search-input");
+
+    function openSearch() {
+        searchOverlay.classList.add("active");
+        searchFab.classList.add("fab-hidden");
+        searchOverlay.setAttribute("aria-hidden", "false");
+        setTimeout(() => searchInput.focus(), 100);
+    }
+
+    function closeSearch() {
+        searchOverlay.classList.remove("active");
+        searchFab.classList.remove("fab-hidden");
+        searchOverlay.setAttribute("aria-hidden", "true");
+        searchInput.value = "";
+        currentSearchQuery = "";
+        renderProducts();
+    }
+
+    function renderSearchResults(query) {
+        searchOverlayResults.innerHTML = "";
+        if (!query) {
+            searchOverlayResults.innerHTML = `<div class="search-overlay-empty">Start typing to search products...</div>`;
+            return;
+        }
+        const results = products.filter(p =>
+            p.name.toLowerCase().includes(query)
+        );
+        if (results.length === 0) {
+            searchOverlayResults.innerHTML = `<div class="search-overlay-empty">No products found for "${query}"</div>`;
+            return;
+        }
+        results.forEach(p => {
+            const item = document.createElement("a");
+            item.className = "search-overlay-result-item";
+            item.href = "#catalog";
+            item.innerHTML = `
+                <img src="${p.image}" alt="${p.name}" class="search-overlay-result-img" loading="lazy">
+                <div class="search-overlay-result-info">
+                    <div class="search-overlay-result-name">${p.name}</div>
+                    <div class="search-overlay-result-price">$${p.price.toFixed(2)}</div>
+                </div>
+            `;
+            item.addEventListener("click", (e) => {
+                e.preventDefault();
+                closeSearch();
+                document.getElementById("catalog").scrollIntoView({ behavior: "smooth" });
+            });
+            searchOverlayResults.appendChild(item);
+        });
+    }
+
+    if (searchFab && searchOverlay) {
+        searchFab.addEventListener("click", openSearch);
+        searchOverlayClose.addEventListener("click", closeSearch);
+        searchOverlay.addEventListener("click", (e) => {
+            if (e.target === searchOverlay) closeSearch();
+        });
+        document.addEventListener("keydown", (e) => {
+            if (e.key === "Escape" && searchOverlay.classList.contains("active")) closeSearch();
+        });
+        searchInput.addEventListener("input", (e) => {
+            const q = e.target.value.trim().toLowerCase();
+            currentSearchQuery = q;
+            renderSearchResults(q);
+            renderProducts();
+        });
+    }
+
     /* ==========================================================================
        B. USER SESSION & AUTHENTICATION (LocalStorage)
        ========================================================================== */
@@ -1068,6 +1142,8 @@ document.addEventListener("DOMContentLoaded", () => {
         profileStatusDot.classList.remove("active");
         clinicUserSkin.value = "unspecified";
         currentSkinFilter = "all";
+        currentSearchQuery = "";
+        if (searchInput) searchInput.value = "";
         
         filterSkinOptions.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
         filterSkinOptions.querySelector("[data-skin='all']").classList.add("active");
@@ -1181,13 +1257,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const filteredProducts = products.filter(product => {
             const matchesConcern = (currentConcernFilter === "all" || product.concern === currentConcernFilter);
             const matchesSkin = (currentSkinFilter === "all" || product.skinTypes.includes(currentSkinFilter));
-            return matchesConcern && matchesSkin;
+            const matchesSearch = !currentSearchQuery || product.name.toLowerCase().includes(currentSearchQuery);
+            return matchesConcern && matchesSkin && matchesSearch;
         });
 
         if (filteredProducts.length === 0) {
             productGridContainer.innerHTML = `
                 <div class="empty-catalog-message" style="grid-column: 1/-1; text-align: center; padding: 48px 0; color: hsl(var(--color-slate-gray));">
-                    <p>${i18n.t("catalog.empty")}</p>
+                <p>${currentSearchQuery ? `No products found for "${currentSearchQuery}"` : i18n.t("catalog.empty")}</p>
                 </div>
             `;
             return;
