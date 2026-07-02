@@ -2034,7 +2034,8 @@ document.addEventListener("DOMContentLoaded", () => {
         2. Evaluate chemical layers carefully (e.g. explain that high AHA peeling solutions or 2% BHA Salicylic Acid must not be layered in the same routine step with Retinol to protect the epidermal barrier).
         3. Restrict recommendations strictly to products within our inventory. Recommend product names exactly as listed above.
         4. If the user mentions concerns like dry, oily, red/sensitive, or anti-aging, map their concerns to our matching products.
-        5. Keep responses structured, professional, and relatively concise (under 4-5 sentences where possible). Use clean html tags (like <strong> or <br>) for formatting. Do not use markdown (such as asterisks) since the output is rendered directly as HTML.`;
+        5. Keep responses structured, professional, and relatively concise (under 4-5 sentences where possible). Use clean html tags (like <strong> or <br>) for formatting. Do not use markdown (such as asterisks) since the output is rendered directly as HTML.
+        6. You are fluent in all languages. You must detect the language the user is speaking and always reply back in that exact language.`;
 
         // Format history payload
         const messagesPayload = [
